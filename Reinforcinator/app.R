@@ -1,19 +1,6 @@
 ## Updating input from column options
 ### https://stackoverflow.com/questions/42199115/error-in-r-object-of-type-closure-is-not-subsettable
 #https://stackoverflow.com/questions/37887482/filtering-from-selectinput-in-r-shiny
-#
-# source("init.R")
-# source("funs.R")
-#
-# # datasets
-# elevator<-read_csv("E2.csv")
-# picture_stream<-read_csv("mainstream1.csv")
-# two_person_picture<-read_csv("sample_stream_2.csv")
-#
-# # more datasets
-# noeffect<-read_csv("reinforcer_sample_noeffect.csv")
-# punishment<-read_csv("reinforcer_sample_PUNISHMENT.csv")
-# reinforcement<-read_csv("reinforcer_sample_reinforcement.csv")
 
 library(ReenforcinateR)
 library(tidyverse)
@@ -412,8 +399,9 @@ server <- function(input, output,session) {
         })
 
         ## This Runs and shows the data frame
+        # hopefully this works with the tidy stuff ...
         rc_df<<-reactive({
-            Recounter2(behaviorstream(),
+            recounter(behaviorstream(),
                        input$beh_var,
                        input$reinf_var,
                        actor = NULL,
@@ -422,7 +410,6 @@ server <- function(input, output,session) {
 
         ## Descriptive Stats
         rc_df_descriptives <<-reactive({
-            Recounter2(behaviorstream(),
                        input$beh_var,
                        input$reinf_var,
                        actor = NULL,
