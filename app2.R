@@ -1,5 +1,4 @@
-
-
+rm(list = ls())
 library(ReenforcinateR)
 library(tidyverse)
 library(shiny)
@@ -247,12 +246,11 @@ server <- function(input, output,session) {
     ## This Runs and shows the data frame
     # hopefully this works with the tidy stuff ...
     rc_df<<-reactive({
-      recounter(behaviorstream(),
+      Recounter2(behaviorstream(),
                 input$beh_var,
                 input$reinf_var,
                 actor = NULL,
-                missing_data = NULL,
-      contingency = NULL)$recounted_data_frame
+                missing_data = NULL)$recounted_data_frame
     })
 
     ## Descriptive Stats
