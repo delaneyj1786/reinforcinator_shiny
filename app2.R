@@ -67,116 +67,9 @@ ui <- fluidPage(
       br(),
       br(),
       br(),
-      "Select a nesting variable for which observations are nested under (i.e., behaviors by focal student). This will be used in the regression analysis to control for repeated measures under the selected unit. Note, the Reinforcinator uses the geepack package, and the nesting variable populates the 'Waves' argument of the GEE function. ",
-      h4("Step 5: Run Analysis"),
-      "Select the 'Run Analysis' button in order to update the results tabs below.",
-      br(),
-      h1("Interpreting the Results"),
-      "There are 10 tabs below which each display a result of the analysis.
-    The Data tab will display the CSV file and the Recounted Data File Tab will display the recounted data file (please refer to the glossary for definitions of these terms.
-    All of the contingency tables and contingency table tests are accessed in their respective tabs. For a regression analysis using generalized estimated equations for nested observations (i.e., observations in focal students),
-    please select a nesting variable and click on the Regression Summary tab. ) ",
-      br(),
-      h4("Interpreting GEE Regressions"),
-      "Based on Allison and Liker (1981), the contingency table z-tests use the following equation to compare the probability of
-    target behaviors to chance (defined by base rate proportion of the target behavior):  ",
-      withMathJax(
-        helpText("$$z(1) = \\frac{(P(T|A)-P(T)}{\\sqrt(\\frac{P(T)*(1-P(T))*(1-P(A))}{(N-k)*P(A)}}$$"
-
-                 #   helpText("$$\\frac{z(1)}{2}$$"
-        )
-      ),
-      "Where P(T|A) is the probability of a target behavior given the after reinforcement sequence, P(T) is the overall probability of a target behavior,
-    and P(A) is the overall probability of behaviors in the reinforcement sequence. These values are obtained by the respective cells in the contingency table and the values
-    are provided in the 'liker Score' summary table",
-      br(),
-      h4("Interpreting the GEE output"),
-      "The following conversion can be used to obtain the difference between target behavior probability before and aafter reinforcement using the following equation
-   to convert the beta coefficients to probabilies: ",
-      withMathJax(
-        helpText("$$P(y=1|x_{i}) =  \\frac{e^{\\beta_{0}+\\beta_{1}x}}{1+e^{\\beta_{0}+\\beta_{1}x}}$$"
-        )
-      ),
-      br(),
-      h1("Description of Example Datasets"),
-      h4("Elevator Data"),
-      "The elevator dataset consists of 119 observations of a contrived 'button pressing' experiment, wherein a participant presses (or does not press) the call
-   button for the elevator to arrive.
-   Observations are spread across 4 days,
-   and each day has a different number of continuous observation episodes.
-   Each episode occurs in a particular context and for a particular participant.
-   This dataset is intended to showcase the various abilities of the Reinforcinator to
-   control for various contexts with the regression analysis, as well as provide an illustration of
-   how the recounted observations work in a dataset with high base rate of potential reinforcers",
-      h4("Picture Data"),
-      "The Picture dataset comprises 25 observations across all students in a classroom. Target behaviors can correspond
-   to hypothesis one of research question one in James' DeLaney's thesis study, namely, does On-Task behavior (green) change as
-   a function of Social Approval (Red). The coloring scheme uses green for target behaviors, yellow for non-target behaviors, and
-   red for potentially reinforcing behaviors. This dataset is intended to provide a low-sample look at how observations are re-coded for each
-   'reinforcement phase' or sub-series of observations.Note, that this dataset will not work with the regression analysis (as of version 1), due to a single level of the nesting variable (e.g., Actor).",
-      h4("Two Person Picture Data"),
-      img(src="reinforcer_stream_two_person.png",width = 600,
-          height = 300, alt = "schematic for reinforcer analysis"),
-      br(),
-      "The two_person Picture dataset comprises a total of 30 observations across two students in a classroom. The patterns are the same for both students.
- This dataset is intended to provide a low-sample look at how the regression anaylsis accounts for repeated measures within a nesting variable, in this case, 'Actor' is the nesting variable.",
-
-      h4("Reinforcer Example"),
-      "This dataset contains 10 observations of a single reinforcer where the probability is greater after reinforcement for target behaviors. ",
-      h1("Limitations"),
-      "The version 1 of the Reinforcinator is limitted mainly in the file upload size. Files larger than 100kb may take substantial time loading. Currently,
-    the app lacks a progress indicator, but even larger files should not take longer than 3 minutes to upload. Once the file is uploaded, the user must confirm the dataset in order to populate the rest of the menu items.
-    This applet also only supports one nesting variable for the GEE regression analysis.",
-
-      # https://stackoverflow.com/questions/29936561/how-do-i-add-a-link-to-open-a-pdf-file-in-a-new-window-from-my-r-shiny-app
       tabsetPanel(position = "above",
                   tabPanel("Data",tableOutput("contents")),
                   tabPanel("Recounted Data",tableOutput("contents_rc")),
-                  tabPanel("Glossary",
-                           br(),
-                           h4("Recounted Observations"),
-                           "recount_stream : This is the behavior stream from the original datafile that has been replicated (i.e., recounted)
-                       NxM number of times, where N is the number of original observations and M is the number of observed (potential) reinforcers.",       # https://shiny.rstudio.com/tutorial/written-tutorial/lesson2/
-                           br(),
-                           br(),
-                           ("sub_series: This refers to each iteration of a recounted series, corresponding to each reinforcer in the original datafile.
-                       For example, sub-series 2 refers to the second replication (counting) of the behavior stream.
-                       There are M sub-series, corresponding to M reinforcers.") ,
-                           br(),
-                           br(),
-                           ("recount_stream_index: This is the index of the original observation stream. It resets once the number of original observations has been reached. It should be used in conjunction with sub-series to create an index for the recounted observations
-                       (i.e., Sub-Series 2, observation 3 refers to the 13th observation for a series of 10 with two reinforcers."),
-                           br(),
-                           br(),
-                           ("recount_recode_stream: This is the binary (i.e., Target Behavior, Non-Target Behavior), re-classification scheme of
-                       the recounted observations. It is used to build the regression and contingency table models along with recount_sequence and regression_recount_sequence to classify Reinforcers as missing values."),
-                           br(),
-                           br(),
-                           ("recount_sequence: This is the trinary (i.e., Before reinforcer, After Reinforcer, Reinforcer), re-classification scheme of
-                       the recounted observations, to identify an observation relative to a reinforcer, for a given sub-series. It is used to build the regression and contingency table models along with regression_recount_sequence to classify Reinforcers as missing values."),
-                           br(),
-                           br(),
-                           ("recount_recode_numeric: This is a numeric conversion of recount_recode_stream used for binomial z-tests along with recount_sequence to identify the reinforcer position for a given sub-series. "),
-                           br(),
-                           br(),
-                           ("regression_recount_sequence: This is the recount_sequence that has removed reinforcer for a given sub-series for the regression analysis. For example, reinforcer 1 for sub-series 1 is removed (coded as NA for subseries 1),
-                       but counts as non-target for all other sub-series."),
-                           br(),
-                           h4("Contingency Tables"),
-                           "Contingency tables comprise a frequency and probability table of the behavior counts according to reinforcement sequence (i.e., After and Before), and
-                     status as a target behavior. Probabilities are reinforcers. The probabilities are below the frequencies and contain the .1 suffix. All probabilities are
-                     obtained by dividing the counts by the row margins (i.e., Reinforcement Series.",
-                           "Recounted Table: The Recounted table is a cross-classification of Target Behavior (i.e., Not Target or Target) by Reinforcer Sequence (i.e., after or before) for the Recounted series of observations.",
-                           "Average Table: The Average table is a cross-classifcation of Target Behavior by Reinforcement Sequence for the Recounted Table divided by the total number of reinforcing events",
-                           "Recomputed Table: The Recomputed table is a cross-classification Target Behavior by Reinforcement Sequence where the cell values are obtained in the following steps. 1) Each sub-series is broken into a contingency table for the row-conditioned probabilities. 2) Each cell is multiplied by the corresponding value from the Average Contingency Table. 3. The values of each sub-series are added together for a summary table of the 'Recomputed Frequencies'.  ",
-                           br(),
-                           h4("Regression Summary"),
-                           "The Regression analysis summary reports the results of a GEE analysis using the geepack package. This specifies a general linear model for non-normal distributions and uses generalized estimating equations for repeated
-                        observations.
-                        All models use the nesting / clustering variable as an 'ID' and sub-series as a 'wave',
-                        for which observations of the same unit are ordered for
-                        repeated measures. The regression is specified for a binomially distributed outcome variable."
-                  ),
                   #           tabPanel("html: Recounted Data", htmlOutput("text")),
                   tabPanel("Descriptive Statistics: DataFrame",verbatimTextOutput("contents_descriptives")),
                   tabPanel("Contingency Tables: Recounted",verbatimTextOutput("contents_rc_tab")),
@@ -197,10 +90,6 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram  output$contents_rc_tab
 server <- function(input, output,session) {
 
-  # create data frame
-  #    csv<<-eventReactive(input$file1,{
-  #        read_csv(input$file1$datapath)
-  #    })
 
   csv<<-reactive({
     #      if(!exists(input$file1)) return()
@@ -243,20 +132,11 @@ server <- function(input, output,session) {
 
   # Display Recount Contingency Table
   output$contents_rc_tab <- renderPrint({
-    #      (sum_recount_tab()) %>%  addmargins()
-    # strange work around
-    #xtabs(Freq ~ Sex+Color, data=countdf)  # http://www.cookbook-r.com/Manipulating_data/Converting_between_data_frames_and_contingency_tables/
-    #Var1	Var2	Freq
-    #     sum_recount_tab()
     recount_tab_bind()
   })
 
   # Display Average Contingency Table
   output$contents_avg_tab <- renderPrint({
-    #   table_arrange(sum_avg_tab()) %>%  addmargins()
-    #    xtabs(Freq~Var1+Var2,sum_avg_tab())
-    #     sum_avg_tab()
-
     avg_tab_bind()
   })
 
@@ -324,7 +204,6 @@ server <- function(input, output,session) {
 
     updateSelectInput(session, "beh_var",
                       label = NULL,
-                      # choices = unique(dat1()$beh_stream[dat1()$beh_stream==input$beh_stream]),
                       choices =  column_levels ,
                       selected = "Nothing Selected")
   })
