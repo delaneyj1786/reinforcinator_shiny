@@ -212,9 +212,6 @@ server <- function(input, output,session) {
   observeEvent(input$beh_stream,{
     column_levels <- as.character(sort(unique(dat1()[[input$beh_stream]])))
 
-    #      if(input$beh_stream== "Nothing Selected"){
-    #        return()
-    #      }
 
     updateSelectInput(session, "reinf_var",
                       label = NULL,
@@ -254,7 +251,8 @@ server <- function(input, output,session) {
                 input$beh_var,
                 input$reinf_var,
                 actor = NULL,
-                missing_data = NULL)$recounted_data_frame
+                missing_data = NULL,
+      contingency = NULL)$recounted_data_frame
     })
 
     ## Descriptive Stats
