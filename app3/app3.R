@@ -21,9 +21,13 @@ ui <- fluidPage(
                                     "Reinforcement",
                                     "Neutral",
                                     "Punishment")),
-            actionButton("button1", "Confirm Data Selection")
+            actionButton("button1", "Confirm Data Selection"),
+            br(),
+            selectInput(inputId = "beh_stream",
+                        label = "Select behavior stream column:",
+                        choices = "Nothing Selected") #
 
-        ), # close sidbar panel
+        ), # close sidebar panel
 
         # Show a plot of the generated distribution
         mainPanel(
@@ -55,6 +59,19 @@ server <- function(input, output, session) {
     # Display Original Data
     output$contents <- renderTable({
         dat1()
+    })
+
+    ######## Sidebar interface for selecting function arguments
+    observe({
+        # requires file 1
+        #    req(input$file1)
+        dsnames <- names(dat1())
+        cb_options <- list()
+        cb_options[dsnames] <- dsnames
+        updateSelectInput(session, "beh_stream",
+                          label = NULL,
+                          choices = cb_options,
+                          selected = "")
     })
 
 }
