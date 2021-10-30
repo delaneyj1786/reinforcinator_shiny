@@ -1,5 +1,6 @@
 library(shiny)
 library(ReenforcinateR)
+library(tidyverse)
 
 ## Needs a pipeline
 # No group?: Then use recounter or recounter 2
@@ -48,7 +49,8 @@ ui <- fluidPage(
         # Show a plot of the generated distribution
         mainPanel(
             tabsetPanel(position = "above",
-                        tabPanel("Data",tableOutput("contents"))
+                        tabPanel("Data",tableOutput("contents")),
+                        tabPanel("Recounted Data",tableOutput("contents_rc"))
             ) # close tabset panel
         ) # close main panel
 
@@ -75,6 +77,11 @@ server <- function(input, output, session) {
     # Display Original Data
     output$contents <- renderTable({
         dat1()
+    })
+
+    # Display reinforcer data
+    output$contents_rc <- renderTable({
+        rc_df()
     })
 
     ######## Sidebar interface for selecting function arguments
@@ -121,6 +128,15 @@ server <- function(input, output, session) {
         # create data frame
         behaviorstream<<-eventReactive(input$button2,{
             (((dat1()[[input$beh_stream]])))
+        }) # close behavior stream
+
+        # create rc_df
+        rc_df<<-reactive({
+            Recounter2(behaviorstream(),
+                       input$beh_var,
+                       input$reinf_var,
+                       actor = NULL,
+                       missing_data = NULL)$recounted_data_frame
         })
     }) ## Close button2
 
