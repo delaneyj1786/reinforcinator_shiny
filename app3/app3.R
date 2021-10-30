@@ -38,6 +38,10 @@ ui <- fluidPage(
                         label = "Select target consequence:",
                         choices = "Nothing Selected"),
 
+            actionButton("button2", "Run Analysis"),
+            br(),
+            br(),
+            downloadLink("downloadData", "Download Recounted Data File")
 
         ), # close sidebar panel
 
@@ -109,6 +113,16 @@ server <- function(input, output, session) {
                           selected = "Nothing Selected")
     })
 
+
+    ## Activate reinforcer
+
+    observeEvent(c(input$button2,input$beh_var,input$reinf_var,input$beh_stream),{
+
+        # create data frame
+        behaviorstream<<-eventReactive(input$button2,{
+            (((dat1()[[input$beh_stream]])))
+        })
+    }) ## Close button2
 
 }
 
