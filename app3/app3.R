@@ -1,7 +1,9 @@
-
-
 library(shiny)
 library(ReenforcinateR)
+
+## Needs a pipeline
+# No group?: Then use recounter or recounter 2
+# Group - split and apply on list
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -25,7 +27,12 @@ ui <- fluidPage(
             br(),
             selectInput(inputId = "beh_stream",
                         label = "Select behavior stream column:",
-                        choices = "Nothing Selected") #
+                        choices = "Nothing Selected"),
+
+            selectInput(inputId = "beh_var",
+                        label = "Select target behavior:",
+                        choices = "Nothing Selected"),  ## needs to be updated with the dataset behavior column
+
 
         ), # close sidebar panel
 
@@ -72,7 +79,20 @@ server <- function(input, output, session) {
                           label = NULL,
                           choices = cb_options,
                           selected = "")
+    }) ### Close for behavior stream variable
+
+
+    # update behavior options based on column levels
+    # https://stackoverflow.com/questions/47248534/dynamically-list-choices-for-selectinput-from-a-user-selected-column
+    observeEvent(input$beh_stream,{
+        column_levels <- as.character(sort(unique(dat1()[[input$beh_stream]])))
+        updateSelectInput(session, "beh_var",
+                          label = NULL,
+                          choices =  column_levels ,
+                          selected = "Nothing Selected")
     })
+
+
 
 }
 
