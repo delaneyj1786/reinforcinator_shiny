@@ -183,10 +183,15 @@ server <- function(input, output, session) {
                        actor = NULL)
         })
 
+        behaviorstream2<<-eventReactive(input$button3,{
+            (((split_df()[[input$beh_stream]])))
+        }) # close behavior stream
+
+
         # run reinforcinator on split
         recount_split_df<<-reactive({
             group_split_recounter(
-                split_df(),
+                behaviorstream2(),
                 input$beh_var,
                 input$reinf_var,
                 input$group_var
