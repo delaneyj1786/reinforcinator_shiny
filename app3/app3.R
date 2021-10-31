@@ -125,16 +125,18 @@ server <- function(input, output, session) {
                           selected = "Nothing Selected")
     })
 
-    observeEvent(input$beh_stream,{
-        column_levels <- as.character(sort(unique(dat1()[[input$beh_stream]])))
-
-
+    # Group name column
+    observe({
+        # requires file 1
+        #    req(input$file1)
+        dsnames <- names(dat1())
+        cb_options <- list()
+        cb_options[dsnames] <- dsnames
         updateSelectInput(session, "group_var",
                           label = NULL,
-                          # choices = unique(dat1()$beh_stream[dat1()$beh_stream==input$beh_stream]),
-                          choices =  column_levels ,
-                          selected = "Nothing Selected")
-    })
+                          choices = cb_options,
+                          selected = "")
+    }) ### Close for behavior stream variable
 
 
     ## Activate reinforcer
