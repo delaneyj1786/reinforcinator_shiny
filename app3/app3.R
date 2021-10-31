@@ -55,7 +55,8 @@ ui <- fluidPage(
         mainPanel(
             tabsetPanel(position = "above",
                         tabPanel("Data",tableOutput("contents")),
-                        tabPanel("Recounted Data",tableOutput("contents_rc"))
+                        tabPanel("Recounted Data",tableOutput("contents_rc")),
+                        tabPanel("Group Split",tableOutput("contents_rcsplit_df"))
             ) # close tabset panel
         ) # close main panel
 
@@ -88,6 +89,13 @@ server <- function(input, output, session) {
     output$contents_rc <- renderTable({
         rc_df()
     })
+
+
+    # Display split df
+    output$contents_rcsplit_df <- renderTable({
+        recount_split_df()
+    })
+
 
     ######## Sidebar interface for selecting function arguments
     observe({
@@ -139,8 +147,8 @@ server <- function(input, output, session) {
     }) ### Close for behavior stream variable
 
 
-    ## Activate reinforcer
-
+    ## Activate reinforcer ####
+    ### Overall Analysis #################
     observeEvent(c(input$button2,input$beh_var,input$reinf_var,input$beh_stream),{
 
         # create data frame
@@ -157,6 +165,38 @@ server <- function(input, output, session) {
                        missing_data = NULL)$recounted_data_frame
         })
     }) ## Close button2
+
+    ### Group Analysis #################
+    observeEvent(c(input$button3,input$beh_var,input$reinf_var,input$beh_stream, input$group_var),{
+
+        # create data frame
+        behaviorstream<<-eventReactive(input$button3,{
+            (((dat1()[[input$beh_stream]])))
+        }) # close behavior stream
+
+        # create split_df
+        split_df<<-reactive({
+            group_splitter(behaviorstream(),
+                       input$beh_var,
+                       input$reinf_var,
+                       input$group_var,
+                       actor = NULL)
+        })
+
+        # run reinforcinator on split
+        recount_split_df<<-reactive({
+            group_split_recounter(
+                split_df(),
+                input$beh_var,
+                input$reinf_var,
+                input$group_var
+            )
+        })
+
+    }) ## Close button2
+
+
+
 
 }
 
