@@ -44,6 +44,7 @@ ui <- fluidPage(
                         choices = "Nothing Selected"),
 
             actionButton("button2", "Run Overall Analysis"), # no grouping
+            actionButton("button3", "Run Group Analysis"), # grouping
             br(),
             br(),
             downloadLink("downloadData", "Download Recounted Data File")
