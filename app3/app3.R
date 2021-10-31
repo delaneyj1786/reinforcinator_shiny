@@ -39,7 +39,11 @@ ui <- fluidPage(
                         label = "Select target consequence:",
                         choices = "Nothing Selected"),
 
-            actionButton("button2", "Run Analysis"),
+            selectInput(inputId = "group_var",
+                        label = "Select Group Variable:",
+                        choices = "Nothing Selected"),
+
+            actionButton("button2", "Run Overall Analysis"), # no grouping
             br(),
             br(),
             downloadLink("downloadData", "Download Recounted Data File")
@@ -114,6 +118,17 @@ server <- function(input, output, session) {
 
 
         updateSelectInput(session, "reinf_var",
+                          label = NULL,
+                          # choices = unique(dat1()$beh_stream[dat1()$beh_stream==input$beh_stream]),
+                          choices =  column_levels ,
+                          selected = "Nothing Selected")
+    })
+
+    observeEvent(input$beh_stream,{
+        column_levels <- as.character(sort(unique(dat1()[[input$beh_stream]])))
+
+
+        updateSelectInput(session, "group_var",
                           label = NULL,
                           # choices = unique(dat1()$beh_stream[dat1()$beh_stream==input$beh_stream]),
                           choices =  column_levels ,
