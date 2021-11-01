@@ -208,7 +208,7 @@ server <- function(input, output, session) {
         })
 
         behaviorstream2<<-eventReactive(input$button3,{
-            (((split_df()[[input$beh_stream]])))
+            (((split_df()[[1]][[input$beh_stream]])))
         }) # close behavior stream
 
 
