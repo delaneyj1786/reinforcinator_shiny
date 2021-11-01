@@ -6,6 +6,13 @@ library(tidyverse)
 # No group?: Then use recounter or recounter 2
 # Group - split and apply on list
 
+
+## the issue is with recounter vs. recounter 2
+
+# figure out how to adapt group with recounter2
+
+# also - have a feeling we want split_group inside group_recounter (so legacy is the sep. function)
+
 # Define UI for application that draws a histogram
 ui <- fluidPage(
 
@@ -56,7 +63,9 @@ ui <- fluidPage(
             tabsetPanel(position = "above",
                         tabPanel("Data",tableOutput("contents")),
                         tabPanel("Recounted Data",tableOutput("contents_rc")),
-                        tabPanel("Group Split",tableOutput("contents_rcsplit_df"))
+                        tabPanel("Group Split Data",verbatimTextOutput("contents_split_df"))
+#                        tabPanel("Group Split",tableOutput("contents_rcsplit_df"))
+
             ) # close tabset panel
         ) # close main panel
 
@@ -92,10 +101,15 @@ server <- function(input, output, session) {
 
 
     # Display split df
+    output$contents_split_df <- renderPrint({
+        split_df()
+    })
+
+
+    # Display recounted group split df
     output$contents_rcsplit_df <- renderTable({
         recount_split_df()
     })
-
 
     ######## Sidebar interface for selecting function arguments
     observe({
@@ -176,27 +190,28 @@ server <- function(input, output, session) {
 
         # create split_df
         split_df<<-reactive({
-            group_splitter(behaviorstream(),
+            group_splitter(dat1(),
+                       behaviorstream(),
                        input$beh_var,
                        input$reinf_var,
                        input$group_var,
                        actor = NULL)
         })
 
-        behaviorstream2<<-eventReactive(input$button3,{
-            (((split_df()[[input$beh_stream]])))
-        }) # close behavior stream
-
-
-        # run reinforcinator on split
-        recount_split_df<<-reactive({
-            group_split_recounter(
-                behaviorstream2(),
-                input$beh_var,
-                input$reinf_var,
-                input$group_var
-            )
-        })
+        # behaviorstream2<<-eventReactive(input$button3,{
+        #     (((split_df()[[input$beh_stream]])))
+        # }) # close behavior stream
+        #
+        #
+        # # run reinforcinator on split
+        # recount_split_df<<-reactive({
+        #     group_split_recounter2(
+        #         behaviorstream2(),
+        #         input$beh_var,
+        #         input$reinf_var,
+        #         input$group_var
+        #     )
+        # })
 
     }) ## Close button2
 
