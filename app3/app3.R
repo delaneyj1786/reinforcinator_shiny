@@ -64,8 +64,8 @@ ui <- fluidPage(
                         tabPanel("Data",tableOutput("contents")),
                         tabPanel("Recounted Data",tableOutput("contents_rc")),
                         tabPanel("Group Split Data",verbatimTextOutput("contents_split_df")),
-                        tabPanel("Recounted Group",tableOutput("contents_rcsplit_df"))
-#                        tabPanel("Group Split",tableOutput("contents_rcsplit_df"))
+                        tabPanel("Recounted Group",tableOutput("contents_rcsplit_df")),
+                        tabPanel("Group Split Stream",verbatimTextOutput("test_split_df_stream")) ### testing
 
             ) # close tabset panel
         ) # close main panel
@@ -110,6 +110,14 @@ server <- function(input, output, session) {
     # Display recounted group split df
     output$contents_rcsplit_df <- renderTable({
         recount_split_df()
+    })
+
+
+    ##########################
+    ### TEST ####
+    # Try for display split_Df stream
+    output$test_split_df_stream <- renderPrint({
+        behaviorstream2()
     })
 
     ######## Sidebar interface for selecting function arguments
