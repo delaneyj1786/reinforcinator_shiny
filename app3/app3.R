@@ -50,8 +50,14 @@ ui <- fluidPage(
                         label = "Select Group Variable:",
                         choices = "Nothing Selected"),
 
+            selectInput(inputId = "group_var2",
+                        label = "Select Second Group Variable:",
+                        choices = "Nothing Selected"),
+
             actionButton("button2", "Run Overall Analysis"), # no grouping
             actionButton("button3", "Run Group Analysis"), # grouping
+            actionButton("button4", "Run 2 Group Analysis"), # grouping by two
+
             br(),
             br(),
             downloadLink("downloadData", "Download Recounted Data File")
@@ -151,6 +157,20 @@ server <- function(input, output, session) {
         cb_options <- list()
         cb_options[dsnames] <- dsnames
         updateSelectInput(session, "group_var",
+                          label = NULL,
+                          choices = cb_options,
+                          selected = "")
+    }) ### Close for behavior stream variable
+
+
+    # Group 2 name column
+    observe({
+        # requires file 1
+        #    req(input$file1)
+        dsnames <- names(dat1())
+        cb_options <- list()
+        cb_options[dsnames] <- dsnames
+        updateSelectInput(session, "group_var2",
                           label = NULL,
                           choices = cb_options,
                           selected = "")
