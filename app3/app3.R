@@ -63,7 +63,6 @@ ui <- fluidPage(
             tabsetPanel(position = "above",
                         tabPanel("Data",tableOutput("contents")),
                         tabPanel("Recounted Data",tableOutput("contents_rc")),
-                        tabPanel("Group Split Data",verbatimTextOutput("contents_split_df")),
                         tabPanel("Recounted Group",tableOutput("contents_rcsplit_df"))
 
             ) # close tabset panel
@@ -99,11 +98,6 @@ server <- function(input, output, session) {
         rc_df()
     })
 
-
-    # Display split df
-    output$contents_split_df <- renderPrint({
-        split_df()
-    })
 
 
     # Display recounted group split df
