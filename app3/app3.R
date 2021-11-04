@@ -250,13 +250,13 @@ server <- function(input, output, session) {
 
         # create split_df
         split_df2<<-reactive({
-            group_splitter(dat1(),
+            group_splitter2(dat1(),
                            behaviorstream(),
                            input$beh_var,
                            input$reinf_var,
                            input$group_var,
                            input$group_var2,
-                           actor = NULL)
+                        filt = TRUE)
         })
 
 
