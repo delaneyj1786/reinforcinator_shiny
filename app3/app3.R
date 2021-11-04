@@ -69,8 +69,8 @@ ui <- fluidPage(
             tabsetPanel(position = "above",
                         tabPanel("Data",tableOutput("contents")),
                         tabPanel("Recounted Data",tableOutput("contents_rc")),
-                        tabPanel("Recounted Group",tableOutput("contents_rcsplit_df"))
-
+                        tabPanel("Recounted Group",tableOutput("contents_rcsplit_df")),
+                        tabPanel("Recounted Group",tableOutput("contents_rcsplit_df2"))
             ) # close tabset panel
         ) # close main panel
 
@@ -111,6 +111,10 @@ server <- function(input, output, session) {
         recount_split_df()
     })
 
+    # Display 2 recounted group split df
+    output$contents_rcsplit_df2 <- renderTable({
+        recount_split_df2()
+    })
 
 
     ######## Sidebar interface for selecting function arguments
@@ -233,40 +237,40 @@ server <- function(input, output, session) {
 
     #
     # ### Group Analysis 2 #################
-    # observeEvent(c(input$button4,input$beh_var,input$reinf_var,input$beh_stream, input$group_var, input$group_var2),{
-    #
-    #     # create data frame
-    #     behaviorstream<<-eventReactive(input$button4,{
-    #         (((dat1()[[input$beh_stream]])))
-    #     }) # close behavior stream
-    #
-    #     # create split_df
-    #     split_df2<<-reactive({
-    #         group_splitter(dat1(),
-    #                        behaviorstream(),
-    #                        input$beh_var,
-    #                        input$reinf_var,
-    #                        input$group_var,
-    #                        input$group_var2,
-    #                        actor = NULL)
-    #     })
-    #
-    #
-    #     # We just need the character input ... not the actual stream ..
-    #     # YES!!!!
-    #     # run reinforcinator on split
-    #     recount_split_df2<<-reactive({
-    #         group_split_recounter(
-    #             split_df(),
-    #             input$beh_stream,
-    #             input$beh_var,
-    #             input$reinf_var,
-    #             input$group_var  ## techincally ... actor i think
-     #         )
-    #     })
-    #
-    # }) ## Close button2
-    #
+    observeEvent(c(input$button4,input$beh_var,input$reinf_var,input$beh_stream, input$group_var, input$group_var2),{
+
+        # create data frame
+        behaviorstream<<-eventReactive(input$button4,{
+            (((dat1()[[input$beh_stream]])))
+        }) # close behavior stream
+
+        # create split_df
+        split_df2<<-reactive({
+            group_splitter(dat1(),
+                           behaviorstream(),
+                           input$beh_var,
+                           input$reinf_var,
+                           input$group_var,
+                           input$group_var2,
+                           actor = NULL)
+        })
+
+
+        # We just need the character input ... not the actual stream ..
+        # YES!!!!
+        # run reinforcinator on split
+        recount_split_df2<<-reactive({
+            group_split_recounter(
+                split_df(),
+                input$beh_stream,
+                input$beh_var,
+                input$reinf_var,
+                input$group_var  ## techincally ... actor i think
+            )
+        })
+
+    }) ## Close button2
+
 
 
 }
