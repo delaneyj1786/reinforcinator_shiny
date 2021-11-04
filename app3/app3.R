@@ -265,7 +265,7 @@ server <- function(input, output, session) {
         # run reinforcinator on split
         recount_split_df2<<-reactive({
             group_split_recounter2(
-                split_df(),
+                split_df2(),
                 input$beh_stream,
                 input$beh_var,
                 input$reinf_var,
