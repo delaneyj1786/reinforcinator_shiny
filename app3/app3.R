@@ -8,11 +8,8 @@ library(tidyverse)
 # No group?: Then use recounter or recounter 2
 # Group - split and apply on list
 
-
-## the issue is with recounter vs. recounter 2
-# figure out how to adapt group with recounter2
-# also - have a feeling we want split_group inside group_recounter (so legacy is the sep. function)
-
+# Holy moly ... works beautifully right now (can see each of the different structures w/ current buttons )
+# will leave this as is i think (at least for demo)
 
 # should have 1 reinfrocer x 4 (1 per vid per person)
 
