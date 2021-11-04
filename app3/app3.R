@@ -53,6 +53,8 @@ ui <- fluidPage(
             selectInput(inputId = "group_var2",
                         label = "Select Second Group Variable:",
                         choices = "Nothing Selected"),
+## Need 1) partner rcounter 2) deleter 3) combiner
+
 
             actionButton("button2", "Run Overall Analysis"), # no grouping
             actionButton("button3", "Run Group Analysis"), # grouping
