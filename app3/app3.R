@@ -261,8 +261,7 @@ server <- function(input, output, session) {
 
 
         # We just need the character input ... not the actual stream ..
-        # YES!!!!
-        # run reinforcinator on split
+# The trcik was splitting it with split 2 (using filt) pipe to original group_split
         recount_split_df2<<-reactive({
             group_split_recounter(
                 split_df2(),
