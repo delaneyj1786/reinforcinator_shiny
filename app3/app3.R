@@ -8,12 +8,12 @@ library(tidyverse)
 
 
 ## the issue is with recounter vs. recounter 2
-
 # figure out how to adapt group with recounter2
-
 # also - have a feeling we want split_group inside group_recounter (so legacy is the sep. function)
 
-# Define UI for application that draws a histogram
+
+# should have 1 reinfrocer x 4 (1 per vid per person)
+
 ui <- fluidPage(
 
     # Application title
@@ -72,7 +72,7 @@ ui <- fluidPage(
                         tabPanel("Data",tableOutput("contents")),
                         tabPanel("Recounted Data",tableOutput("contents_rc")),
                         tabPanel("Recounted Group",tableOutput("contents_rcsplit_df")),
-                        tabPanel("Recounted Group",tableOutput("contents_rcsplit_df2"))
+                        tabPanel("Recounted 2 Group",tableOutput("contents_rcsplit_df2"))
             ) # close tabset panel
         ) # close main panel
 
