@@ -1,5 +1,6 @@
 library(shiny)
-library(ReenforcinateR)
+library(devtools)
+install_github("delaneyj1786/REINFORCINATOR")
 library(tidyverse)
 
 ## Needs a pipeline
