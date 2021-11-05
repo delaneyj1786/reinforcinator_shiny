@@ -166,10 +166,21 @@ server <- function(input, output, session) {
 
         updateSelectInput(session, "reinf_var",
                           label = NULL,
-                          # choices = unique(dat1()$beh_stream[dat1()$beh_stream==input$beh_stream]),
                           choices =  column_levels ,
                           selected = "Nothing Selected")
     })
+
+    # Update for Deletion Var
+    observeEvent(input$beh_stream,{
+        column_levels <- as.character(sort(unique(dat1()[[input$beh_stream]])))
+
+
+        updateSelectInput(session, "delete_var",
+                          label = NULL,
+                          choices =  column_levels ,
+                          selected = "Nothing Selected")
+    })
+
 
     # Group name column
     observe({
@@ -197,6 +208,9 @@ server <- function(input, output, session) {
                           choices = cb_options,
                           selected = "")
     }) ### Close for behavior stream variable
+
+
+
 
 
     ## Activate reinforcer ####
