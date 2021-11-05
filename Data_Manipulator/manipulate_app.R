@@ -66,7 +66,7 @@ ui <- fluidPage(
 ) # end UI
 
 # Define server logic required to draw a histogram
-server <- function(input, output) {
+server <- function(input, output,  session) {
 
     ### alternative w/pre load
     dat1<-eventReactive(input$button1,{
