@@ -122,6 +122,19 @@ server <- function(input, output,  session) {
                           selected = "Nothing Selected")
     })
 
+
+    # Update for Deletion Var
+    observeEvent(input$beh_stream,{
+        column_levels <- as.character(sort(unique(dat1()[[input$beh_stream]])))
+
+
+        updateSelectInput(session, "delete_var",
+                          label = NULL,
+                          choices =  column_levels ,
+                          selected = "Nothing Selected")
+    })
+
+
 } # end server
 
 # Run the application
