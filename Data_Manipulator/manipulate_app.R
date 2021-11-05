@@ -5,37 +5,53 @@ library(shiny)
 ui <- fluidPage(
 
     # Application title
-    titlePanel("Old Faithful Geyser Data"),
+    titlePanel("Data Manipulation"),
 
     # Sidebar with a slider input for number of bins
     sidebarLayout(
         sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
-        ),
+            selectInput(inputId = "dataset",
+                        label = "Choose a dataset:",
+                        choices = c("Input_File",
+                                    "Elevator",
+                                    "Picture",
+                                    "Two_Person",
+                                    "Reinforcement",
+                                    "Neutral",
+                                    "Punishment")),
+            actionButton("button1", "Confirm Data Selection"),
+        ), # end sidebarPanel
 
         # Show a plot of the generated distribution
         mainPanel(
-           plotOutput("distPlot")
-        )
-    )
-)
+           tabsetPanel(position = "above",
+                       tabPanel("Data",tableOutput("contents"))
+           )
+        ) # end main panel
+
+    ) #end sidebarLayout
+) # end UI
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
 
-    output$distPlot <- renderPlot({
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    ### alternative w/pre load
+    dat1<-eventReactive(input$button1,{
+        switch(input$dataset,
+               "Input_File"= csv(),
+               "Elevator" = elevator,
+               "Picture" = picture_stream,
+               "Two_Person" = two_person_picture,
+               "Reinforcement" = reinforcement,
+               "Neutral" = noeffect,
+               "Punishment" = punishment)
 
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
     })
-}
+    # Display Original Data
+    output$contents <- renderTable({
+        dat1()
+    })
+} # end server
 
 # Run the application
 shinyApp(ui = ui, server = server)
