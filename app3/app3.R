@@ -207,8 +207,6 @@ server <- function(input, output, session) {
 
     # partner var column
     observe({
-        # requires file 1
-        #    req(input$file1)
         dsnames <- names(dat1())
         cb_options <- list()
         cb_options[dsnames] <- dsnames
@@ -289,8 +287,6 @@ server <- function(input, output, session) {
 
 
 # We just need the character input ... not the actual stream ..
-# YES!!!!
-        # run reinforcinator on split
         recount_split_df<<-reactive({
             group_split_recounter(
                 split_df(),
