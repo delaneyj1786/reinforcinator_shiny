@@ -204,6 +204,21 @@ server <- function(input, output, session) {
                           choices =  column_levels ,
                           selected = "Nothing Selected")
     })
+
+    # partner var column
+    observe({
+        # requires file 1
+        #    req(input$file1)
+        dsnames <- names(dat1())
+        cb_options <- list()
+        cb_options[dsnames] <- dsnames
+        updateSelectInput(session, "partner_var",
+                          label = NULL,
+                          choices = cb_options,
+                          selected = "")
+    }) ### Close for behavior stream variable
+
+
     # Group name column
     observe({
         # requires file 1
