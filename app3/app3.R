@@ -11,7 +11,6 @@ library(tidyverse)
 # Holy moly ... works beautifully right now (can see each of the different structures w/ current buttons )
 # will leave this as is i think (at least for demo)
 
-# should have 1 reinfrocer x 4 (1 per vid per person)
 
 ui <- fluidPage(
 
@@ -33,16 +32,16 @@ ui <- fluidPage(
             actionButton("button1", "Confirm Data Selection"),
             br(),
             selectInput(inputId = "beh_stream",
-                        label = "Select behavior stream column:",
+                        label = "Select Behavior Stream Column:",
                         choices = "Nothing Selected"),
 
             selectInput(inputId = "beh_var",
-                        label = "Select target behavior:",
+                        label = "Select Target Behavior (DV):",
                         choices = "Nothing Selected"),  ## needs to be updated with the dataset behavior column
 
 
             selectInput(inputId = "reinf_var",
-                        label = "Select target consequence:",
+                        label = "Select Target Consequence (IV):",
                         choices = "Nothing Selected"),
 
             selectInput(inputId = "group_var",
@@ -52,6 +51,24 @@ ui <- fluidPage(
             selectInput(inputId = "group_var2",
                         label = "Select Second Group Variable:",
                         choices = "Nothing Selected"),
+
+###### not add to server yet ####
+            selectInput(inputId = "delete_var",
+                        label = "Select Variable for Deletion:",
+                        choices = "Nothing Selected"),
+
+selectInput(inputId = "combine_var1",
+            label = "Select Variable 1 for Combination:",
+            choices = "Nothing Selected"),
+
+selectInput(inputId = "combine_var2",
+            label = "Select Variable 2 for Combination:",
+            choices = "Nothing Selected"),
+
+selectInput(inputId = "partner_var",
+            label = "Select Partner Variable:",
+            choices = "Nothing Selected"),
+
 ## Need 1) partner rcounter 2) deleter 3) combiner
 
 
