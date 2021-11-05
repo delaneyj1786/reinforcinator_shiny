@@ -8,8 +8,9 @@ library(tidyverse)
 # No group?: Then use recounter or recounter 2
 # Group - split and apply on list
 
-# Holy moly ... works beautifully right now (can see each of the different structures w/ current buttons )
-# will leave this as is i think (at least for demo)
+# Combine and Delete will need some thinking
+# They produce a new behaviorstream column - so if these options are selected then this has to be
+# the new stream
 
 
 ui <- fluidPage(
@@ -75,7 +76,8 @@ selectInput(inputId = "partner_var",
             actionButton("button2", "Run Overall Analysis"), # no grouping
             actionButton("button3", "Run Group Analysis"), # grouping
             actionButton("button4", "Run 2 Group Analysis"), # grouping by two
-
+            actionButton("combinebutton", "Combine Codes"), # combine codes
+            actionButton("deletebutton", "Delete Codes"), # delete codes
             br(),
             br(),
             downloadLink("downloadData", "Download Recounted Data File")
