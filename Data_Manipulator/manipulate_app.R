@@ -19,6 +19,22 @@ ui <- fluidPage(
                                     "Reinforcement",
                                     "Neutral",
                                     "Punishment")),
+            selectInput(inputId = "delete_var",
+                        label = "Select Variable for Deletion:",
+                        choices = "Nothing Selected"),
+
+            selectInput(inputId = "combine_var1",
+                        label = "Select Variable 1 for Combination:",
+                        choices = "Nothing Selected"),
+
+            selectInput(inputId = "combine_var2",
+                        label = "Select Variable 2 for Combination:",
+                        choices = "Nothing Selected"),
+
+            selectInput(inputId = "partner_var",
+                        label = "Select Partner Variable:",
+                        choices = "Nothing Selected"),
+
             actionButton("button1", "Confirm Data Selection"),
         ), # end sidebarPanel
 
