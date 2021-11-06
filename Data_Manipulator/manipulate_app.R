@@ -97,6 +97,13 @@ server <- function(input, output,  session) {
     })
 
 
+    # Display combine Data
+    output$combine_contents <- renderTable({
+        combine_df()
+    })
+
+
+
     ######## Sidebar interface for selecting function arguments
     # get options for behavior var
     observe({
