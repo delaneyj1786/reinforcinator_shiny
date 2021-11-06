@@ -56,7 +56,8 @@ ui <- fluidPage(
 
             actionButton("combinebutton", "Combine Codes"), # combine codes
             actionButton("deletebutton", "Delete Codes"), # delete codes
-            actionButton("partnerbutton", "Run Partner Analysis") # delete codes
+            actionButton("partnerbutton", "Run Partner Analysis"), # delete codes
+            downloadLink("downloadData", "Download Recounted Data File")
         ), # end sidebarPanel
 
         # Show a plot of the generated distribution
