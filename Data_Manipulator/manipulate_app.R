@@ -57,7 +57,10 @@ ui <- fluidPage(
             actionButton("combinebutton", "Combine Codes"), # combine codes
             actionButton("deletebutton", "Delete Codes"), # delete codes
             actionButton("partnerbutton", "Run Partner Analysis"), # delete codes
-            downloadLink("downloadData", "Download Recounted Data File")
+            downloadLink("downloadData_combine", "Download Combined Data File"),
+            downloadLink("downloadData_delete", "Download Delete Data File"),
+            downloadLink("downloadData_partner", "Download Partner Data File")
+
         ), # end sidebarPanel
 
         # Show a plot of the generated distribution
@@ -277,6 +280,27 @@ server <- function(input, output,  session) {
                      partnerstream())
         })
     }) ## Close button2
+
+
+    #### Downloading
+    #download  rc_df
+    output$downloadData_combine <- downloadHandler(
+        filename = function() {
+            paste("data-", Sys.Date(), ".csv", sep="")
+        },
+        content = function(file) {
+            write.csv(combine_df(), file)
+        }
+    )
+
+
+
+
+
+
+
+
+
 } # end server
 
 # Run the application
