@@ -222,6 +222,27 @@ server <- function(input, output,  session) {
     }) ## Close button2
 
 
+
+
+    # Combiner
+    ## Activate Combiner  ####
+    ### Overall Analysis #################
+    observeEvent(c(input$combinebutton,input$beh_stream, input$combine_var1, input$combine_var2),{
+
+        # create data frame
+        behaviorstream<<-eventReactive(input$combinebutton,{
+            (((dat1()[[input$beh_stream]])))
+        }) # close behavior stream
+
+        # create rc_df
+        combine_df<<-reactive({
+            combiner(dat1(),
+                    behaviorstream(),
+                    input$combine_var1,
+                    input$combine_var2)
+        })
+    }) ## Close button2
+
 } # end server
 
 # Run the application
