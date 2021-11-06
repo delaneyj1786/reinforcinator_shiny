@@ -63,7 +63,8 @@ ui <- fluidPage(
         mainPanel(
            tabsetPanel(position = "above",
                        tabPanel("Data",tableOutput("contents")),
-                       tabPanel("Delete Data", tableOutput("delete_contents"))
+                       tabPanel("Delete Data", tableOutput("delete_contents")),
+                       tabPanel("Combine Data", tableOutput("combine_contents")),
            )
         ) # end main panel
 
