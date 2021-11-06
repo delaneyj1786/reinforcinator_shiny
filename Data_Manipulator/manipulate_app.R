@@ -50,6 +50,10 @@ ui <- fluidPage(
                         label = "Select Partner Variable:",
                         choices = "Nothing Selected"),
 
+            selectInput(inputId = "partner_type",
+                        label = "Select Partner Type:",
+                        choices = "Nothing Selected"),
+
             actionButton("combinebutton", "Combine Codes"), # combine codes
             actionButton("deletebutton", "Delete Codes"), # delete codes
             actionButton("partnerbutton", "Run Partner Analysis") # delete codes
@@ -153,6 +157,28 @@ server <- function(input, output,  session) {
 
 
         updateSelectInput(session, "combine_var2",
+                          label = NULL,
+                          choices =  column_levels ,
+                          selected = "Nothing Selected")
+    })
+
+    # partner var column
+    observe({
+        dsnames <- names(dat1())
+        cb_options <- list()
+        cb_options[dsnames] <- dsnames
+        updateSelectInput(session, "partner_var",
+                          label = NULL,
+                          choices = cb_options,
+                          selected = "")
+    }) ### Close for behavior stream variable
+
+
+    # Update for partner type
+    observeEvent(input$partner_var,{
+        column_levels <- as.character(sort(unique(dat1()[[input$partner_var]])))
+
+        updateSelectInput(session, "partner_type",
                           label = NULL,
                           choices =  column_levels ,
                           selected = "Nothing Selected")
