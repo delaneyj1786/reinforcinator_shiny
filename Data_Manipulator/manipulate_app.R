@@ -269,7 +269,7 @@ server <- function(input, output,  session) {
 
         # create rc_df
         partner_df<<-reactive({
-            combiner(dat1(),
+            partner_recoder(dat1(),
                      behaviorstream(),
                      input$partner_type,
                      input$reinf_var,
