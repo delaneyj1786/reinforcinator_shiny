@@ -62,7 +62,8 @@ ui <- fluidPage(
         # Show a plot of the generated distribution
         mainPanel(
            tabsetPanel(position = "above",
-                       tabPanel("Data",tableOutput("contents"))
+                       tabPanel("Data",tableOutput("contents")),
+                       tabPanel("Delete Data", tableOutput("delete_contents"))
            )
         ) # end main panel
 
@@ -88,6 +89,12 @@ server <- function(input, output,  session) {
     output$contents <- renderTable({
         dat1()
     })
+
+    # Display Delete Data
+    output$delete_contents <- renderTable({
+        delete_df()
+    })
+
 
     ######## Sidebar interface for selecting function arguments
     # get options for behavior var
@@ -183,6 +190,27 @@ server <- function(input, output,  session) {
                           choices =  column_levels ,
                           selected = "Nothing Selected")
     })
+
+
+
+
+    ####################
+    # Deleter
+    ## Activate Deleter  ####
+    ### Overall Analysis #################
+    observeEvent(c(input$deletebutton,input$beh_stream, input$delete_var),{
+
+        # create data frame
+        behaviorstream<<-eventReactive(input$deletebutton,{
+            (((dat1()[[input$beh_stream]])))
+        }) # close behavior stream
+
+        # create rc_df
+        delete_df<<-reactive({
+            deleter(behaviorstream(),
+                       input$delete_var)
+        })
+    }) ## Close button2
 
 
 } # end server
