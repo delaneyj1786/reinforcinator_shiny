@@ -207,7 +207,8 @@ server <- function(input, output,  session) {
 
         # create rc_df
         delete_df<<-reactive({
-            deleter(behaviorstream(),
+            deleter(dat1(),
+                    behaviorstream(),
                        input$delete_var)
         })
     }) ## Close button2
