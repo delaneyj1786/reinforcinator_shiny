@@ -104,6 +104,11 @@ server <- function(input, output,  session) {
     })
 
 
+    # Display partner Data
+    output$partner_contents <- renderTable({
+        partner_df()
+    })
+
 
     ######## Sidebar interface for selecting function arguments
     # get options for behavior var
@@ -244,6 +249,33 @@ server <- function(input, output,  session) {
         })
     }) ## Close button2
 
+
+
+
+    # Partner
+    ## Activate Partner Analysis  ####
+    ### Overall Analysis #################
+    observeEvent(c(input$partnerbutton,input$beh_stream, input$partner_type, input$reinf_var, input$partner_var),{
+
+        # create data frame
+        behaviorstream<<-eventReactive(input$partnerbutton,{
+            (((dat1()[[input$beh_stream]])))
+        }) # close behavior stream
+
+        # create partner col
+        partnerstream<<-eventReactive(input$partnerbutton,{
+            (((dat1()[[input$partner_var]])))
+        }) # close behavior stream
+
+        # create rc_df
+        partner_df<<-reactive({
+            combiner(dat1(),
+                     behaviorstream(),
+                     input$partner_type,
+                     input$reinf_var,
+                     partnerstream())
+        })
+    }) ## Close button2
 } # end server
 
 # Run the application
