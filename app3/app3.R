@@ -53,17 +53,6 @@ ui <- fluidPage(
                         label = "Select Second Group Variable:",
                         choices = "Nothing Selected"),
 
-###### not add to server yet ####
-
-
-
-selectInput(inputId = "combine_var2",
-            label = "Select Variable 2 for Combination:",
-            choices = "Nothing Selected"),
-
-selectInput(inputId = "partner_var",
-            label = "Select Partner Variable:",
-            choices = "Nothing Selected"),
 
 ## Need 1) partner rcounter 2) deleter 3) combiner
 
@@ -71,8 +60,6 @@ selectInput(inputId = "partner_var",
             actionButton("button2", "Run Overall Analysis"), # no grouping
             actionButton("button3", "Run Group Analysis"), # grouping
             actionButton("button4", "Run 2 Group Analysis"), # grouping by two
-            actionButton("combinebutton", "Combine Codes"), # combine codes
-            actionButton("deletebutton", "Delete Codes"), # delete codes
             br(),
             br(),
             downloadLink("downloadData", "Download Recounted Data File")
@@ -167,33 +154,6 @@ server <- function(input, output, session) {
                           selected = "Nothing Selected")
     })
 
-
-
-
-
-
-
-    # Update for Combine Var2
-    observeEvent(input$beh_stream,{
-        column_levels <- as.character(sort(unique(dat1()[[input$beh_stream]])))
-
-
-        updateSelectInput(session, "combine_var2",
-                          label = NULL,
-                          choices =  column_levels ,
-                          selected = "Nothing Selected")
-    })
-
-    # partner var column
-    observe({
-        dsnames <- names(dat1())
-        cb_options <- list()
-        cb_options[dsnames] <- dsnames
-        updateSelectInput(session, "partner_var",
-                          label = NULL,
-                          choices = cb_options,
-                          selected = "")
-    }) ### Close for behavior stream variable
 
 
     # Group name column
