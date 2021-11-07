@@ -283,7 +283,7 @@ server <- function(input, output,  session) {
 
 
     #### Downloading
-    #download  rc_df
+    #download  combine df
     output$downloadData_combine <- downloadHandler(
         filename = function() {
             paste("data-", Sys.Date(), ".csv", sep="")
@@ -295,9 +295,27 @@ server <- function(input, output,  session) {
 
 
 
+    #download delete df
+    output$downloadData_delete <- downloadHandler(
+        filename = function() {
+            paste("data-", Sys.Date(), ".csv", sep="")
+        },
+        content = function(file) {
+            write.csv(delete_df(), file)
+        }
+    )
 
 
 
+    #download Partner df
+    output$downloadData_partner <- downloadHandler(
+        filename = function() {
+            paste("data-", Sys.Date(), ".csv", sep="")
+        },
+        content = function(file) {
+            write.csv(partner_df(), file)
+        }
+    )
 
 
 
