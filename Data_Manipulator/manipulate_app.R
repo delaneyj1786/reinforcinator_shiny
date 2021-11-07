@@ -89,6 +89,11 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output,  session) {
 
+    csv<<-reactive({
+        #      if(!exists(input$file1)) return()
+        read_csv(input$file1$datapath)
+    })
+
     ### alternative w/pre load
     dat1<-eventReactive(input$button1,{
         switch(input$dataset,
