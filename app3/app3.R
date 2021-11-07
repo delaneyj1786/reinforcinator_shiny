@@ -8,11 +8,6 @@ library(tidyverse)
 # No group?: Then use recounter or recounter 2
 # Group - split and apply on list
 
-# Combine and Delete will need some thinking
-# They produce a new behaviorstream column - so if these options are selected then this has to be
-# the new stream
-
-
 ui <- fluidPage(
 
     # Application title
