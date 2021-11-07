@@ -54,13 +54,8 @@ ui <- fluidPage(
                         choices = "Nothing Selected"),
 
 ###### not add to server yet ####
-            selectInput(inputId = "delete_var",
-                        label = "Select Variable for Deletion:",
-                        choices = "Nothing Selected"),
 
-selectInput(inputId = "combine_var1",
-            label = "Select Variable 1 for Combination:",
-            choices = "Nothing Selected"),
+
 
 selectInput(inputId = "combine_var2",
             label = "Select Variable 2 for Combination:",
@@ -172,28 +167,10 @@ server <- function(input, output, session) {
                           selected = "Nothing Selected")
     })
 
-    # Update for Deletion Var
-    observeEvent(input$beh_stream,{
-        column_levels <- as.character(sort(unique(dat1()[[input$beh_stream]])))
 
 
-        updateSelectInput(session, "delete_var",
-                          label = NULL,
-                          choices =  column_levels ,
-                          selected = "Nothing Selected")
-    })
 
 
-    # Update for Combine Var1
-    observeEvent(input$beh_stream,{
-        column_levels <- as.character(sort(unique(dat1()[[input$beh_stream]])))
-
-
-        updateSelectInput(session, "combine_var1",
-                          label = NULL,
-                          choices =  column_levels ,
-                          selected = "Nothing Selected")
-    })
 
 
     # Update for Combine Var2
