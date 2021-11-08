@@ -90,8 +90,8 @@ ui <- fluidPage(
                        tabPanel("Delete Data", tableOutput("delete_contents")),
                        tabPanel("Combine Data", tableOutput("combine_contents")),
                        tabPanel("Partner Recode", tableOutput("partner_contents")),
-                       tabPanel("Raw Summary", tableOutput("raw_sum")), # not add to server
-                       tabPanel("Manipulated Summary", tableOutput("man_sum")) # not add to server
+                       tabPanel("Raw Summary", verbatimTextOutput("raw_sum_contents")), # not add to server
+                       tabPanel("Manipulated Summary", verbatimTextOutput("man_sum_contents")) # not add to server
            )
         ) # end main panel
 
@@ -140,6 +140,18 @@ server <- function(input, output,  session) {
         partner_df()
     })
 
+
+
+    # Display raw summaries
+    output$raw_sum_contents <- renderPrint({
+        raw_sum()
+    })
+
+
+    # Display manipulated summaries ** not implemented
+    output$man_sum_contents <- renderPrint({
+        man_sum()
+    })
 
     ######## Sidebar interface for selecting function arguments
     # get options for behavior var
@@ -348,6 +360,21 @@ server <- function(input, output,  session) {
     #########################
     # Summaries #
     ## Raw Data ##
+
+    observeEvent(c(input$runsum,input$beh_stream, input$beh_var),{
+
+        # create data frame
+        behaviorstream<<-eventReactive(input$runsum,{
+            (((dat1()[[input$beh_stream]])))
+        }) # close behavior stream
+
+
+        # summarize
+        raw_sum<<-reactive({
+            table(behaviorstream()$input$beh_var)
+        })
+    }) ## Close button2
+
 
 
 
