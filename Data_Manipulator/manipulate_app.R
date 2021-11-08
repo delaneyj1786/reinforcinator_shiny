@@ -370,8 +370,13 @@ server <- function(input, output,  session) {
 
 
         # summarize
-        raw_sum<<-reactive({
-            table(behaviorstream()$input$beh_var)
+        # raw_sum<<-reactive({
+        #     table(dat1()[,3])
+        # })
+
+
+        raw_sum <<- reactive({
+            janitor::tabyl(behaviorstream())
         })
     }) ## Close button2
 
