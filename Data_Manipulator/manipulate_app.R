@@ -1,6 +1,10 @@
 
 library(shiny)
 
+## Need Two summaries
+# 1. For raw data
+# 2. For transformed (manipulated)
+
 # Define UI for application that draws a histogram
 ui <- fluidPage(
 
