@@ -53,12 +53,17 @@ ui <- fluidPage(
 
 
             actionButton("button2", "Run Overall Analysis"), # no grouping
+br(),
             actionButton("button3", "Run Group Analysis"), # grouping
+br(),
             actionButton("button4", "Run 2 Group Analysis"), # grouping by two
             br(),
             br(),
-            downloadLink("downloadData", "Download Recounted Data File")
-
+            downloadLink("downloadData", "Download Recounted Data File"),
+br(),
+            downloadLink("downloadData_1group", "Download Recounted Group Data File"),
+br(),
+            downloadLink("downloadData_2group", "Download Recounted 2 Group Data File")
         ), # close sidebar panel
 
         # Show a plot of the generated distribution
@@ -267,7 +272,8 @@ server <- function(input, output, session) {
 
     }) ## Close button2
 
-
+##################
+    # Download Recounted DF
     output$downloadData <- downloadHandler(
         filename = function() {
             paste("data-", Sys.Date(), ".csv", sep="")
