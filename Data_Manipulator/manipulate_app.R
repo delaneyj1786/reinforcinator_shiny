@@ -390,7 +390,26 @@ server <- function(input, output,  session) {
 
     ## Delete Data ##
 
-
+    # observeEvent(c(input$runsum_m,input$beh_stream, input$beh_var, input$deletebutton, input$delete_var),{
+    #
+    #     # create data frame
+    #     behaviorstream<<-eventReactive(input$runsum,{
+    #         (((delete()[[input$beh_stream]])))
+    #     }) # close behavior stream
+    #
+    #
+    #     # summarize
+    #     # raw_sum<<-reactive({
+    #     #     table(dat1()[,3])
+    #     # })
+    #
+    #
+    #     raw_sum <<- reactive({
+    #         janitor::tabyl(behaviorstream())
+    #     })
+    # }) ## Close button2
+    #
+    #
     ## Partner Data ##
 
 
