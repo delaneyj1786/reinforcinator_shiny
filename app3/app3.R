@@ -1,3 +1,8 @@
+# note : testing files located in desktop / sage analysis
+# creating some shorter test files
+
+
+
 library(shiny)
 library(devtools)
 #install_github("delaneyj1786/REINFORCINATOR")
