@@ -73,8 +73,8 @@ ui <- fluidPage(
             actionButton("partnerbutton", "Run Partner Analysis"), # delete codes
             br(),
             br(),
-            actionButton("runsum", "Run Raw Summaries"), # run
-            actionButton("runsum_t", "Run Transformed Summaries"), # run summaries
+            actionButton("runsum", "Run Raw Data Summaries"), # run
+            actionButton("runsum_m", "Run Manipulated Data Summaries"), # run summaries
             br(),
             br(),
             downloadLink("downloadData_combine", "Download Combined Data File"),
@@ -89,7 +89,9 @@ ui <- fluidPage(
                        tabPanel("Data",tableOutput("contents")),
                        tabPanel("Delete Data", tableOutput("delete_contents")),
                        tabPanel("Combine Data", tableOutput("combine_contents")),
-                       tabPanel("Partner Recode", tableOutput("partner_contents"))
+                       tabPanel("Partner Recode", tableOutput("partner_contents")),
+                       tabPanel("Raw Summary", tableOutput("raw_sum")), # not add to server
+                       tabPanel("Manipulated Summary", tableOutput("man_sum")) # not add to server
            )
         ) # end main panel
 
