@@ -284,6 +284,27 @@ server <- function(input, output, session) {
     )
 
 
+    # Download 1 group
+    output$downloadData_1group <- downloadHandler(
+        filename = function() {
+            paste("data-", Sys.Date(), ".csv", sep="")
+        },
+        content = function(file) {
+            write.csv(recount_split_df(), file)
+        }
+    )
+
+
+    # Download 2 group
+    output$downloadData_2group <- downloadHandler(
+        filename = function() {
+            paste("data-", Sys.Date(), ".csv", sep="")
+        },
+        content = function(file) {
+            write.csv(recount_split_df2(), file)
+        }
+    )
+
 }
 
 # Run the application
