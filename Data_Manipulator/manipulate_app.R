@@ -71,6 +71,12 @@ ui <- fluidPage(
             actionButton("combinebutton", "Combine Codes"), # combine codes
             actionButton("deletebutton", "Delete Codes"), # delete codes
             actionButton("partnerbutton", "Run Partner Analysis"), # delete codes
+            br(),
+            br(),
+            actionButton("runsum", "Run Raw Summaries"), # run
+            actionButton("runsum_t", "Run Transformed Summaries"), # run summaries
+            br(),
+            br(),
             downloadLink("downloadData_combine", "Download Combined Data File"),
             downloadLink("downloadData_delete", "Download Delete Data File"),
             downloadLink("downloadData_partner", "Download Partner Data File")
@@ -335,6 +341,8 @@ server <- function(input, output,  session) {
             write.csv(partner_df(), file)
         }
     )
+
+
 
 
 
