@@ -1,6 +1,9 @@
 # note : testing files located in desktop / sage analysis
 # creating some shorter test files
 
+#### TODO
+# Will need to add a 'search by video feature'
+#  simple filter - but needs percentage summary foo particular behaviors (i.g., ALL OP videos)
 
 
 library(shiny)
