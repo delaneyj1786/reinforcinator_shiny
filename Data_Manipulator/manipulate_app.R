@@ -75,6 +75,7 @@ ui <- fluidPage(
             br(),
             actionButton("runsum", "Run Raw Data Summaries"), # run
             actionButton("runsum_m", "Run Manipulated Data Summaries"), # run summaries
+            actionButton("runsum_com", "Run Combined Data Summaries"),
             br(),
             br(),
             downloadLink("downloadData_combine", "Download Combined Data File"),
@@ -398,11 +399,11 @@ server <- function(input, output,  session) {
 
     ## Combined Data ##
 
-    observeEvent(c(input$runsum_m,input$beh_stream, input$beh_var, input$combinebutton, input$combine_var1, input$combine_var2),{
+    observeEvent(c(input$runsum_com,input$beh_stream, input$beh_var, input$combinebutton, input$combine_var1, input$combine_var2),{
 
         # create data frame
-        behaviorstream_combine<<-eventReactive(input$runsum_m,{
-            (((combine_df()[[input$beh_stream]])))
+        behaviorstream_combine<<-eventReactive(input$runsum_com,{
+            (((combine_df()[["Combined"]])))
         }) # close behavior stream
 
 
