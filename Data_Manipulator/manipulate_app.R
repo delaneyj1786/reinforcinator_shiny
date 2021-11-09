@@ -436,12 +436,6 @@ server <- function(input, output,  session) {
         }) # close behavior stream
 
 
-        # summarize
-        # raw_sum<<-reactive({
-        #     table(dat1()[,3])
-        # })
-
-
         delete_sum <<- reactive({
             janitor::tabyl(behaviorstream_delete())
         })
