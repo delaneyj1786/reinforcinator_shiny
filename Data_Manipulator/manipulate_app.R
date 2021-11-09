@@ -91,7 +91,9 @@ ui <- fluidPage(
                        tabPanel("Combine Data", tableOutput("combine_contents")),
                        tabPanel("Partner Recode", tableOutput("partner_contents")),
                        tabPanel("Raw Summary", verbatimTextOutput("raw_sum_contents")), # not add to server
-                       tabPanel("Delete Summary", verbatimTextOutput("delete_sum_contents")) # not add to server
+                       tabPanel("Delete Summary", verbatimTextOutput("delete_sum_contents")), # not add to server
+                       tabPanel("Combine Summary", verbatimTextOutput("combine_sum_contents")) # not add to server
+
            )
         ) # end main panel
 
@@ -159,6 +161,12 @@ server <- function(input, output,  session) {
         delete_sum()
     })
 
+
+
+    # Display combine summaries ** not implemented
+    output$combine_sum_contents <- renderPrint({
+        combine_sum()
+    })
     ######## Sidebar interface for selecting function arguments
     # get options for behavior var
     observe({
@@ -389,6 +397,26 @@ server <- function(input, output,  session) {
 
 
     ## Combined Data ##
+
+    observeEvent(c(input$runsum_m,input$beh_stream, input$beh_var, input$combinebutton, input$combine_var1, input$combine_var2),{
+
+        # create data frame
+        behaviorstream_combine<<-eventReactive(input$runsum_m,{
+            (((combine_df()[[input$beh_stream]])))
+        }) # close behavior stream
+
+
+        # summarize
+        # raw_sum<<-reactive({
+        #     table(dat1()[,3])
+        # })
+
+
+        combine_sum <<- reactive({
+            janitor::tabyl(behaviorstream_combine())
+        })
+    }) ## Close button2
+
 
 
     ## Delete Data ##
