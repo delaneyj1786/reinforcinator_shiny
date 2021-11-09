@@ -1,11 +1,6 @@
 
 library(shiny)
 
-## Need Two summaries
-# 1. For raw data
-# 2. For transformed (manipulated)
-
-# Define UI for application that draws a histogram
 ui <- fluidPage(
 
     # Application title
@@ -67,20 +62,27 @@ ui <- fluidPage(
             selectInput(inputId = "partner_type",
                         label = "Select Partner Type:",
                         choices = "Nothing Selected"),
-
+br(),
             actionButton("combinebutton", "Combine Codes"), # combine codes
+br(),
             actionButton("deletebutton", "Delete Codes"), # delete codes
+br(),
             actionButton("partnerbutton", "Run Partner Analysis"), # delete codes
             br(),
             br(),
             actionButton("runsum", "Run Raw Data Summaries"), # run
+br(),
             actionButton("runsum_m", "Run Manipulated Data Summaries"), # run summaries
+br(),
             actionButton("runsum_com", "Run Combined Data Summaries"),
+br(),
             actionButton("runsum_par", "Run Partner Data Summaries"),
             br(),
             br(),
             downloadLink("downloadData_combine", "Download Combined Data File"),
+br(),
             downloadLink("downloadData_delete", "Download Delete Data File"),
+br(),
             downloadLink("downloadData_partner", "Download Partner Data File")
 
         ), # end sidebarPanel
@@ -96,7 +98,15 @@ ui <- fluidPage(
                        tabPanel("Delete Summary", verbatimTextOutput("delete_sum_contents")), #
                        tabPanel("Combine Summary", verbatimTextOutput("combine_sum_contents")), #
                        tabPanel("Partner Summary", verbatimTextOutput("partner_sum_contents")) # not add to server
-           )
+           ),
+           h1("Overview"),
+           "This app lets users transform their data by 1) deleting observations 2) combining observations and 3) combining DV with a partner code.",
+           br(),
+           "The final product is a manipulated data frame, stored as a csv, to be used as an input file for the reinforcement detection app.",
+           h1("Instructions"),
+           br(),
+           h4("Selecting Data"),
+           br()
         ) # end main panel
 
     ) #end sidebarLayout
