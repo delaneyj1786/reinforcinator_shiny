@@ -91,7 +91,7 @@ ui <- fluidPage(
                        tabPanel("Combine Data", tableOutput("combine_contents")),
                        tabPanel("Partner Recode", tableOutput("partner_contents")),
                        tabPanel("Raw Summary", verbatimTextOutput("raw_sum_contents")), # not add to server
-                       tabPanel("Manipulated Summary", verbatimTextOutput("man_sum_contents")) # not add to server
+                       tabPanel("Delete Summary", verbatimTextOutput("delete_sum_contents")) # not add to server
            )
         ) # end main panel
 
@@ -140,17 +140,23 @@ server <- function(input, output,  session) {
         partner_df()
     })
 
-
+############# Summaries @@@@@
 
     # Display raw summaries
     output$raw_sum_contents <- renderPrint({
         raw_sum()
     })
 
+#
+#     # Display manipulated summaries ** not implemented
+#     output$man_sum_contents <- renderPrint({
+#         man_sum()
+#     })
 
-    # Display manipulated summaries ** not implemented
-    output$man_sum_contents <- renderPrint({
-        man_sum()
+
+    # Display delete summaries ** not implemented
+    output$delete_sum_contents <- renderPrint({
+        delete_sum()
     })
 
     ######## Sidebar interface for selecting function arguments
@@ -372,9 +378,7 @@ server <- function(input, output,  session) {
         # summarize
         # raw_sum<<-reactive({
         #     table(dat1()[,3])
-        # })
-
-
+        # }
         raw_sum <<- reactive({
             janitor::tabyl(behaviorstream())
         })
@@ -387,30 +391,29 @@ server <- function(input, output,  session) {
     ## Combined Data ##
 
 
-
     ## Delete Data ##
 
-    # observeEvent(c(input$runsum_m,input$beh_stream, input$beh_var, input$deletebutton, input$delete_var),{
-    #
-    #     # create data frame
-    #     behaviorstream<<-eventReactive(input$runsum,{
-    #         (((delete()[[input$beh_stream]])))
-    #     }) # close behavior stream
-    #
-    #
-    #     # summarize
-    #     # raw_sum<<-reactive({
-    #     #     table(dat1()[,3])
-    #     # })
-    #
-    #
-    #     raw_sum <<- reactive({
-    #         janitor::tabyl(behaviorstream())
-    #     })
-    # }) ## Close button2
-    #
-    #
-    ## Partner Data ##
+    observeEvent(c(input$runsum_m,input$beh_stream, input$beh_var, input$deletebutton, input$delete_var),{
+
+        # create data frame
+        behaviorstream_delete<<-eventReactive(input$runsum_m,{
+            (((delete_df()[[input$beh_stream]])))
+        }) # close behavior stream
+
+
+        # summarize
+        # raw_sum<<-reactive({
+        #     table(dat1()[,3])
+        # })
+
+
+        delete_sum <<- reactive({
+            janitor::tabyl(behaviorstream_delete())
+        })
+    }) ## Close button2
+
+
+    # Partner Data ##
 
 
 
