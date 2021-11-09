@@ -76,6 +76,7 @@ ui <- fluidPage(
             actionButton("runsum", "Run Raw Data Summaries"), # run
             actionButton("runsum_m", "Run Manipulated Data Summaries"), # run summaries
             actionButton("runsum_com", "Run Combined Data Summaries"),
+            actionButton("runsum_par", "Run Partner Data Summaries"),
             br(),
             br(),
             downloadLink("downloadData_combine", "Download Combined Data File"),
@@ -91,10 +92,10 @@ ui <- fluidPage(
                        tabPanel("Delete Data", tableOutput("delete_contents")),
                        tabPanel("Combine Data", tableOutput("combine_contents")),
                        tabPanel("Partner Recode", tableOutput("partner_contents")),
-                       tabPanel("Raw Summary", verbatimTextOutput("raw_sum_contents")), # not add to server
-                       tabPanel("Delete Summary", verbatimTextOutput("delete_sum_contents")), # not add to server
-                       tabPanel("Combine Summary", verbatimTextOutput("combine_sum_contents")) # not add to server
-
+                       tabPanel("Raw Summary", verbatimTextOutput("raw_sum_contents")), #
+                       tabPanel("Delete Summary", verbatimTextOutput("delete_sum_contents")), #
+                       tabPanel("Combine Summary", verbatimTextOutput("combine_sum_contents")), #
+                       tabPanel("Partner Summary", verbatimTextOutput("partner_sum_contents")) # not add to server
            )
         ) # end main panel
 
@@ -167,6 +168,11 @@ server <- function(input, output,  session) {
     # Display combine summaries ** not implemented
     output$combine_sum_contents <- renderPrint({
         combine_sum()
+    })
+
+    # Display partnersummaries ** not implemented
+    output$partner_sum_contents <- renderPrint({
+        partner_sum()
     })
     ######## Sidebar interface for selecting function arguments
     # get options for behavior var
@@ -443,6 +449,21 @@ server <- function(input, output,  session) {
 
 
     # Partner Data ##
+    # input$partnerbutton,input$beh_stream, input$partner_type, input$reinf_var, input$partner_var
+    observeEvent(c(input$runsum_par,input$beh_stream, input$beh_var, input$partnerbutton, input$partner_type, input$reinf_var, input$partner_var),{
+
+
+        # create data frame
+        partnerstream<<-eventReactive(input$partnerbutton,{
+            (((dat1()[[input$partner_var]])))
+        })
+
+
+ partner_sum <<- reactive({
+     janitor::tabyl(partnerstream())
+       })
+    }) ## Close button2
+
 
 
 
