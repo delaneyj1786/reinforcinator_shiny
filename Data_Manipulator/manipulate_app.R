@@ -104,9 +104,21 @@ br(),
            br(),
            "The final product is a manipulated data frame, stored as a csv, to be used as an input file for the reinforcement detection app.",
            h1("Instructions"),
+           "1: Selecting Data",
            br(),
-           h4("Selecting Data"),
-           br()
+           "2: Selecting Behavior Stream Variable",
+           br(),
+           h4("Choosing Dataset"),
+           "There are two options for selecting data",
+           br(),
+           h4("Selecting Dataset"),
+           "There are two options for selecting data",
+           br(),
+           h4("Selecting Behavior Stream"),
+           "There are two options for selecting data",
+           br(),
+
+
         ) # end main panel
 
     ) #end sidebarLayout
