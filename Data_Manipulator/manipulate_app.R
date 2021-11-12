@@ -98,7 +98,7 @@ br(),
                        tabPanel("Delete Summary", verbatimTextOutput("delete_sum_contents")), #
                        tabPanel("Combine Summary", verbatimTextOutput("combine_sum_contents")), #
                        tabPanel("Partner Summary", verbatimTextOutput("partner_sum_contents")),
-                       tabPanel("Running Plot",  plotOutput("run_plot")) ## should change the name - did not test yet
+                       tabPanel("Running Plot",  plotOutput("run_plot_contents")) ## should change the name - did not test yet
            ),
            h1("Overview"),
            "This app lets users transform their data by 1) deleting observations 2) combining observations and 3) combining DV with a partner code.",
@@ -199,8 +199,6 @@ server <- function(input, output,  session) {
         delete_sum()
     })
 
-
-
     # Display combine summaries ** not implemented
     output$combine_sum_contents <- renderPrint({
         combine_sum()
@@ -210,6 +208,14 @@ server <- function(input, output,  session) {
     output$partner_sum_contents <- renderPrint({
         partner_sum()
     })
+############### PLOTS #####
+
+    output$run_plot_contents <- renderPrint({
+        run_plot()  ## did not add to server yet
+    })
+
+###########
+
     ######## Sidebar interface for selecting function arguments
     # get options for behavior var
     observe({
