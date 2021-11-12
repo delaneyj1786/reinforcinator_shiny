@@ -97,7 +97,8 @@ br(),
                        tabPanel("Raw Summary", verbatimTextOutput("raw_sum_contents")), #
                        tabPanel("Delete Summary", verbatimTextOutput("delete_sum_contents")), #
                        tabPanel("Combine Summary", verbatimTextOutput("combine_sum_contents")), #
-                       tabPanel("Partner Summary", verbatimTextOutput("partner_sum_contents")) # not add to server
+                       tabPanel("Partner Summary", verbatimTextOutput("partner_sum_contents")),
+                       tabPanel("Running Plot",  plotOutput("run_plot")) ## should change the name - did not test yet
            ),
            h1("Overview"),
            "This app lets users transform their data by 1) deleting observations 2) combining observations and 3) combining DV with a partner code.",
@@ -191,12 +192,6 @@ server <- function(input, output,  session) {
     output$raw_sum_contents <- renderPrint({
         raw_sum()
     })
-
-#
-#     # Display manipulated summaries ** not implemented
-#     output$man_sum_contents <- renderPrint({
-#         man_sum()
-#     })
 
 
     # Display delete summaries ** not implemented
