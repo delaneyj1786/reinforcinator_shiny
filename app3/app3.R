@@ -70,19 +70,13 @@ ui <- fluidPage(
 ## Need 1) partner rcounter 2) deleter 3) combiner
 
 
-            actionButton("button2", "Run Overall Analysis"), # no grouping
-br(),
-            actionButton("button3", "Run Group Analysis"), # grouping
-br(),
-            actionButton("button4", "Run 2 Group Analysis"), # grouping by two
-            br(),
+            actionButton("button2", "Run Overall Analysis"), br(), # no group
+            actionButton("button3", "Run Group Analysis"), br(), # grouping
+            actionButton("button4", "Run 2 Group Analysis"), br(), # grouping by two
 actionButton("run_runplot", "Run Running Plot"), br(),
-actionButton("run_meanplot", "Run Mean Plot"),
-            br(),
-            downloadLink("downloadData", "Download Recounted Data File"),
-br(),
-            downloadLink("downloadData_1group", "Download Recounted Group Data File"),
-br(),
+actionButton("run_meanplot", "Run Mean Plot"), br(),
+            downloadLink("downloadData", "Download Recounted Data File"), br(),
+            downloadLink("downloadData_1group", "Download Recounted Group Data File"), br(),
             downloadLink("downloadData_2group", "Download Recounted 2 Group Data File")
         ), # close sidebar panel
 
