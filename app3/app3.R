@@ -307,17 +307,26 @@ server <- function(input, output, session) {
 
 ######## Plotting Functions ######
     # ### Group Analysis 2 #################
-    # observeEvent(c(input$run_runplot),{
+    observeEvent(c(input$run_runplot),{
 
-    #     # create split_df
-    #     runplot <<-reactive({
-    #         plotting_restructure(recount_df())
-    #
-    #     })
-    #
+         # create data for plotting
+         plot_dat <<-reactive({
+             plotting_restructure(rc_df())
 
-    #
-    # }) ## Close button2
+         })
+
+
+         # create actual ggplot
+         run_plot <<- reactive({
+             # Thus the average value changes for each sub-series (e.g., Before [red] takes over)
+             ggplot(plot_dat(),aes(x = recount_stream_index, y = sub_series_run_prob,
+                                 color = (recount_sequence), group = sub_series)) + geom_point() +facet_grid(~sub_series) +
+                 ggtitle("Running Sequence Probabilities By Sub-Series")+
+                 xlab("Observation Sequence") +
+                 ylab("Running Probability")
+         })
+
+     }) ## Close button2
 
 
 
