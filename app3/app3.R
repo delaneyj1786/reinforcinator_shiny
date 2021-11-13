@@ -76,6 +76,7 @@ br(),
 br(),
             actionButton("button4", "Run 2 Group Analysis"), # grouping by two
             br(),
+actionButton("run_runplot", "Run Running Plot"),
             br(),
             downloadLink("downloadData", "Download Recounted Data File"),
 br(),
@@ -90,7 +91,9 @@ br(),
                         tabPanel("Data",tableOutput("contents")),
                         tabPanel("Recounted Data",tableOutput("contents_rc")),
                         tabPanel("Recounted Group",tableOutput("contents_rcsplit_df")),
-                        tabPanel("Recounted 2 Group",tableOutput("contents_rcsplit_df2"))
+                        tabPanel("Recounted 2 Group",tableOutput("contents_rcsplit_df2")),
+                        tabPanel("Running Plot",  plotOutput("run_plot_contents")) ## should change the name - did not test yet
+
             ) # close tabset panel
         ) # close main panel
 
@@ -120,6 +123,7 @@ server <- function(input, output, session) {
 
     })
 
+    ### Display Data Frames ####
     # Display Original Data
     output$contents <- renderTable({
         dat1()
@@ -129,8 +133,6 @@ server <- function(input, output, session) {
     output$contents_rc <- renderTable({
         rc_df()
     })
-
-
 
     # Display recounted group split df
     output$contents_rcsplit_df <- renderTable({
@@ -142,6 +144,12 @@ server <- function(input, output, session) {
         recount_split_df2()
     })
 
+#### Display Plots ####
+    ############### PLOTS #####
+
+    output$run_plot_contents <- renderPrint({
+        run_plot()  ## did not add to server yet
+    })
 
     ######## Sidebar interface for selecting function arguments
     observe({
