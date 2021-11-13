@@ -307,7 +307,7 @@ server <- function(input, output, session) {
 
 
 ######## Plotting Functions ######
-    # ### Group Analysis 2 #################
+    # ### Run Plot (change name) #################
     observeEvent(c(input$run_runplot),{
 
          # create data for plotting
@@ -328,6 +328,33 @@ server <- function(input, output, session) {
          })
 
      }) ## Close button2
+
+    # ### Mean Plot  #################
+    observeEvent(c(input$run_meanplot),{
+
+        # create data for plotting
+        plot_dat <<-reactive({
+            plotting_restructure(rc_df())
+
+        })
+
+        # create aggregate data
+        plot_dat2 <<- reactive({
+            plot_dat() %>% group_by(sub_series, recount_sequence) %>%
+                summarize(sub_series_mean = mean(sub_series_run_prob)) %>% ungroup()
+        })
+
+        # create actual ggplot
+        mean_plot <<- reactive({
+            # Thus the average value changes for each sub-series (e.g., Before [red] takes over)
+            ggplot(filter(plot_dat2(), recount_sequence != "R"),aes(x = sub_series, y = sub_series_mean, color = (recount_sequence))) + geom_point() + geom_line() +
+                ggtitle("Average Sub-Series Probabilities By Sequence") +
+                xlab("Sub-Series") +
+                ylab("Average Sequence Probabilities")
+
+        })
+
+    }) ## Close button2
 
 
 
