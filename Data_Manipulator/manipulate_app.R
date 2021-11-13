@@ -208,6 +208,7 @@ server <- function(input, output,  session) {
     })
 ############### PLOTS #####
 
+
     output$run_plot_contents <- renderPrint({
         run_plot()  ## did not add to server yet
     })
