@@ -75,6 +75,8 @@ ui <- fluidPage(
             actionButton("button4", "Run 2 Group Analysis"), br(), # grouping by two
 actionButton("run_runplot", "Run Running Plot"), br(),
 actionButton("run_meanplot", "Run Mean Plot"), br(),
+actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
+
             downloadLink("downloadData", "Download Recounted Data File"), br(),
             downloadLink("downloadData_1group", "Download Recounted Group Data File"), br(),
             downloadLink("downloadData_2group", "Download Recounted 2 Group Data File")
@@ -88,7 +90,8 @@ actionButton("run_meanplot", "Run Mean Plot"), br(),
                         tabPanel("Recounted Group",tableOutput("contents_rcsplit_df")),
                         tabPanel("Recounted 2 Group",tableOutput("contents_rcsplit_df2")),
                         tabPanel("Running Plot",  plotOutput("run_plot_contents")),
-                        tabPanel("Mean Change Plot", plotOutput("mean_plot_contents"))## should change the name - did not test yet
+                        tabPanel("Mean Change Plot", plotOutput("mean_plot_contents")),## should change the name - did not test yet
+                        tabPanel("Overall Sequence Plot", plotOutput("sequence_plot_contents"))## should change the name - did not test yet
 
             ) # close tabset panel
         ) # close main panel
@@ -361,6 +364,12 @@ server <- function(input, output, session) {
 
 
 
+
+
+
+
+
+    #### Overall Sequence Plot
 
 
 ##################
