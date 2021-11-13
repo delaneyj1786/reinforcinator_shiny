@@ -76,7 +76,8 @@ br(),
 br(),
             actionButton("button4", "Run 2 Group Analysis"), # grouping by two
             br(),
-actionButton("run_runplot", "Run Running Plot"),
+actionButton("run_runplot", "Run Running Plot"), br(),
+actionButton("run_meanplot", "Run Mean Plot"),
             br(),
             downloadLink("downloadData", "Download Recounted Data File"),
 br(),
@@ -151,6 +152,11 @@ server <- function(input, output, session) {
     output$run_plot_contents <- renderPlot({
         run_plot()  ## did not add to server yet
     })
+
+    output$mean_plot_contents <- renderPlot({
+        mean_plot()
+    })
+
 
     ######## Sidebar interface for selecting function arguments
     observe({
