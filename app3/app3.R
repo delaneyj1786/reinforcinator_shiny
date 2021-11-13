@@ -304,6 +304,28 @@ server <- function(input, output, session) {
 
     }) ## Close button2
 
+
+######## Plotting Functions ######
+    # ### Group Analysis 2 #################
+    # observeEvent(c(input$run_runplot),{
+
+    #     # create split_df
+    #     runplot <<-reactive({
+    #         plotting_restructure(recount_df())
+    #
+    #     })
+    #
+
+    #
+    # }) ## Close button2
+
+
+
+
+
+
+
+
 ##################
     # Download Recounted DF
     output$downloadData <- downloadHandler(
