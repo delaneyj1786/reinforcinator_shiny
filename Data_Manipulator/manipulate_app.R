@@ -67,7 +67,6 @@ br(),
 br(),
             actionButton("deletebutton", "Delete Codes"), # delete codes
 br(),
-            actionButton("partnerbutton", "Run Partner Analysis"), # delete codes
             br(),
             br(),
             actionButton("runsum", "Run Raw Data Summaries"), # run
@@ -98,9 +97,7 @@ br(),
                        tabPanel("Raw Summary", verbatimTextOutput("raw_sum_contents")), #
                        tabPanel("Delete Summary", verbatimTextOutput("delete_sum_contents")), #
                        tabPanel("Combine Summary", verbatimTextOutput("combine_sum_contents")), #
-                       tabPanel("Partner Summary", verbatimTextOutput("partner_sum_contents")),
-                       tabPanel("Running Plot",  plotOutput("run_plot_contents")) ## should change the name - did not test yet
-           ),
+                       tabPanel("Partner Summary", verbatimTextOutput("partner_sum_contents")) ),
            h1("Overview"),
            "This app lets users transform their data by 1) deleting observations 2) combining observations and 3) combining DV with a partner code.",
            br(),
