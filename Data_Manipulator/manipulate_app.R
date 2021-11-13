@@ -77,7 +77,6 @@ br(),
 br(),
             actionButton("runsum_par", "Run Partner Data Summaries"),
             br(),
-actionButton("run_runplot", "Run Running Plot"),
             br(),
             downloadLink("downloadData_combine", "Download Combined Data File"),
 br(),
@@ -206,12 +205,7 @@ server <- function(input, output,  session) {
     output$partner_sum_contents <- renderPrint({
         partner_sum()
     })
-############### PLOTS #####
 
-
-    output$run_plot_contents <- renderPrint({
-        run_plot()  ## did not add to server yet
-    })
 
 ###########
 
