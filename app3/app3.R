@@ -154,6 +154,10 @@ server <- function(input, output, session) {
         mean_plot()
     })
 
+    output$sequence_plot_contents <- renderPlot({
+        sequence_plot()
+    })
+
 
     ######## Sidebar interface for selecting function arguments
     observe({
@@ -359,17 +363,47 @@ server <- function(input, output, session) {
 
     }) ## Close button2
 
-
-
-
-
-
-
-
-
-
-
     #### Overall Sequence Plot
+
+    observeEvent(c(input$run_sequenceplot),{
+
+        # create data for plotting
+        plot_dat <<-reactive({
+            plotting_restructure(rc_df())
+
+        })
+
+        # create aggregate data
+        plot_dat2 <<- reactive({
+            plot_dat() %>% group_by(sub_series, recount_sequence) %>%
+                summarize(sub_series_mean = mean(sub_series_run_prob)) %>% ungroup()
+        })
+
+
+        # create summary across sub-series
+        overall_average <<- reactive({
+            plot_dat2() %>%
+                group_by(recount_sequence) %>%
+                summarize(mean_sub_mean = mean(sub_series_mean)) %>% ungroup() %>% filter(recount_sequence != "R")
+
+        })
+
+        # merge the data frames
+
+         average_df<<- reactive({
+             left_join(plot_dat(), overall_average(), by = "recount_sequence")
+             })
+
+         # create actual ggplot
+         sequence_plot <<- reactive({
+        ggplot(average_df(),aes(x = recount_stream_index, y = sub_series_run_prob, color = (recount_sequence))) + geom_point() + geom_line(aes(y = mean_sub_mean)) +
+            ggtitle("Overall Sequence Average") +
+            xlab("Observation Sequence") +
+            ylab("Running Probabilities of Target")
+         })
+
+
+    }) ## Close button2
 
 
 ##################
