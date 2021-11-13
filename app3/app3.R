@@ -92,7 +92,8 @@ br(),
                         tabPanel("Recounted Data",tableOutput("contents_rc")),
                         tabPanel("Recounted Group",tableOutput("contents_rcsplit_df")),
                         tabPanel("Recounted 2 Group",tableOutput("contents_rcsplit_df2")),
-                        tabPanel("Running Plot",  plotOutput("run_plot_contents")) ## should change the name - did not test yet
+                        tabPanel("Running Plot",  plotOutput("run_plot_contents")),
+                        tabPanel("Mean Change Plot", plotOutput("mean_plot_contents"))## should change the name - did not test yet
 
             ) # close tabset panel
         ) # close main panel
