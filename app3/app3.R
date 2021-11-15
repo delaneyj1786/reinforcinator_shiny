@@ -235,6 +235,9 @@ server <- function(input, output, session) {
     ### Overall Analysis #################
     observeEvent(c(input$button2,input$beh_var,input$reinf_var,input$beh_stream),{
 
+
+
+
         # create data frame
         behaviorstream<<-eventReactive(input$button2,{
             (((dat1()[[input$beh_stream]])))
@@ -247,7 +250,7 @@ server <- function(input, output, session) {
                        input$beh_var,
                        input$reinf_var,
                        actor = NULL,
-                       missing_data = TRUE)$recounted_data_frame
+                       missing_data = NULL)$recounted_data_frame
         })
     }) ## Close button2
 
