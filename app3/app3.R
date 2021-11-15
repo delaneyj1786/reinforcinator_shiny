@@ -236,9 +236,9 @@ server <- function(input, output, session) {
 
 ###### CLEAN DATA ########
     # # Filter out NA values
-          dat1 <<- eventReactive(input$button1, {
-               tidyr::drop_na(dat1())
-                 })
+          # dat1 <<- eventReactive(input$button1, {
+          #      tidyr::drop_na(dat1())
+          #        })
 
 
 
@@ -252,9 +252,9 @@ server <- function(input, output, session) {
             (((dat1()[[input$beh_stream]])))
         }) # close behavior stream
 
-        # remove NA from behaviorstream
-        behaviorstream <<- reactive({
-            behaviorstream()[!is.na(behaviorstream())]})
+        # # remove NA from behaviorstream
+        # behaviorstream <<- reactive({
+        #     behaviorstream()[!is.na(behaviorstream())]})
 
         # create rc_df
         rc_df<<-reactive({
