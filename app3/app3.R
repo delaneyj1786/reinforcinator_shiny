@@ -112,7 +112,6 @@ server <- function(input, output, session) {
     })
 
 
-
     ### alternative w/pre load
     dat1<-eventReactive(input$button1,{
         switch(input$dataset,
@@ -125,6 +124,7 @@ server <- function(input, output, session) {
                "Punishment" = punishment)
 
     })
+
 
     ### Display Data Frames ####
     # Display Original Data
@@ -240,13 +240,14 @@ server <- function(input, output, session) {
             (((dat1()[[input$beh_stream]])))
         }) # close behavior stream
 
+
         # create rc_df
         rc_df<<-reactive({
             Recounter2(behaviorstream(),
                        input$beh_var,
                        input$reinf_var,
                        actor = NULL,
-                       missing_data = NULL)$recounted_data_frame
+                       missing_data = TRUE)$recounted_data_frame
         })
     }) ## Close button2
 
@@ -257,6 +258,8 @@ server <- function(input, output, session) {
         behaviorstream<<-eventReactive(input$button3,{
             (((dat1()[[input$beh_stream]])))
         }) # close behavior stream
+
+
 
         # create split_df
         split_df<<-reactive({
