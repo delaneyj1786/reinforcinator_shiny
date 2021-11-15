@@ -252,6 +252,9 @@ server <- function(input, output, session) {
             (((dat1()[[input$beh_stream]])))
         }) # close behavior stream
 
+        # remove NA from behaviorstream
+        behaviorstream <<- reactive({
+            behaviorstream()[!is.na(behaviorstream())]})
 
         # create rc_df
         rc_df<<-reactive({
