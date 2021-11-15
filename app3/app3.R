@@ -237,7 +237,7 @@ server <- function(input, output, session) {
 ###### CLEAN DATA ########
     # # Filter out NA values
           dat1 <<- eventReactive(input$button1, {
-               na.omit(dat1())
+               tidyr::drop_na(dat1())
                  })
 
 
