@@ -227,15 +227,17 @@ server <- function(input, output, session) {
                           selected = "")
     }) ### Close for behavior stream variable
 
-
+###### CLEAN DATA ########
+    # # Filter out NA values
+          dat1 <<- eventReactive(input$button1, {
+               na.omit(dat1())
+                 })
 
 
 
     ## Activate reinforcer ####
     ### Overall Analysis #################
     observeEvent(c(input$button2,input$beh_var,input$reinf_var,input$beh_stream),{
-
-
 
 
         # create data frame
