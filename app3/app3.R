@@ -6,6 +6,12 @@
 #  simple filter - but needs percentage summary foo particular behaviors (i.g., ALL OP videos)
 
 
+
+#### NOTES FROM DATA TESTING
+### Need liner notes (tutorial ... whatevers) - about removing NA values (no missing values prior to recounter)..
+# Should add an auto function - with a return summary
+### Use Skimr??
+
 library(shiny)
 library(devtools)
 #install_github("delaneyj1786/REINFORCINATOR")
