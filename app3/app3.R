@@ -5,12 +5,8 @@
 # Will need to add a 'search by video feature'
 #  simple filter - but needs percentage summary foo particular behaviors (i.g., ALL OP videos)
 
-
-
-#### NOTES FROM DATA TESTING
-### Need liner notes (tutorial ... whatevers) - about removing NA values (no missing values prior to recounter)..
-# Should add an auto function - with a return summary
-### Use Skimr??
+#### Need to update plot data ... it is not updating the two graphs for multiple groups
+## grouping has no effect on the graph output
 
 library(shiny)
 library(devtools)
