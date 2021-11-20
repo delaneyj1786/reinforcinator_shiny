@@ -92,8 +92,8 @@ actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
                         tabPanel("Plot Dat", tableOutput("contents_plot_dat")),
                         tabPanel("Running Plot",  plotOutput("run_plot_contents")),
                         tabPanel("Mean Change Plot", plotOutput("mean_plot_contents")),## should change the name - did not test yet
-                        tabPanel("Overall Sequence Plot", plotOutput("sequence_plot_contents"))## should change the name - did not test yet
-
+                        tabPanel("Overall Sequence Plot", plotOutput("sequence_plot_contents")), ## should change the name - did not test yet
+                        tabPanel("Recounted Descriptives",tableOutput("rc_descriptive")) # should be vanilla ...
             ) # close tabset panel
         ) # close main panel
 
@@ -165,6 +165,11 @@ server <- function(input, output, session) {
         sequence_plot()
     })
 
+
+#### Display Summary RC ####
+    output$rc_descriptive_contents <- renderPlot({
+        rc_descriptives()
+    })
 
     ######## Sidebar interface for selecting function arguments
     observe({
@@ -258,6 +263,15 @@ server <- function(input, output, session) {
                        missing_data = NULL)$recounted_data_frame
         })
     }) ## Close button2
+
+
+    rc_descriptives <<-reactive({
+        Recounter2(behaviorstream(),
+                   input$beh_var,
+                   input$reinf_var,
+                   actor = NULL,
+                   missing_data = NULL)$descriptive_statistics
+    })
 
     ### Group Analysis #################
     observeEvent(c(input$button3,input$beh_var,input$reinf_var,input$beh_stream, input$group_var),{
