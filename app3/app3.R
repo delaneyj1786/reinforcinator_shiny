@@ -93,7 +93,7 @@ actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
                         tabPanel("Running Plot",  plotOutput("run_plot_contents")),
                         tabPanel("Mean Change Plot", plotOutput("mean_plot_contents")),## should change the name - did not test yet
                         tabPanel("Overall Sequence Plot", plotOutput("sequence_plot_contents")), ## should change the name - did not test yet
-                        tabPanel("Recounted Descriptives",tableOutput("rc_descriptive")) # should be vanilla ...
+                        tabPanel("Recounted Descriptives",verbatimTextOutput("rc_descriptive_contents")) # should be vanilla ...
             ) # close tabset panel
         ) # close main panel
 
@@ -167,7 +167,7 @@ server <- function(input, output, session) {
 
 
 #### Display Summary RC ####
-    output$rc_descriptive_contents <- renderPlot({
+    output$rc_descriptive_contents <- renderPrint({
         rc_descriptives()
     })
 
