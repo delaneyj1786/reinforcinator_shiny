@@ -8,6 +8,9 @@
 #### Need to update plot data ... it is not updating the two graphs for multiple groups
 ## grouping has no effect on the graph output
 
+#test <- recounter(elevator,BEH,"o","A")$recounted_data_frame
+
+
 library(shiny)
 library(devtools)
 #install_github("delaneyj1786/REINFORCINATOR")
@@ -93,7 +96,9 @@ actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
                         tabPanel("Running Plot",  plotOutput("run_plot_contents")),
                         tabPanel("Mean Change Plot", plotOutput("mean_plot_contents")),## should change the name - did not test yet
                         tabPanel("Overall Sequence Plot", plotOutput("sequence_plot_contents")), ## should change the name - did not test yet
-                        tabPanel("Recounted Descriptives",verbatimTextOutput("rc_descriptive_contents")) # should be vanilla ...
+                        tabPanel("Recounted Descriptives",verbatimTextOutput("rc_descriptive_contents")), # should be vanilla ...
+                        tabPanel("Recounted Table",verbatimTextOutput("rc_descriptive_contents")), # should be vanilla only for the base recounted table
+
             ) # close tabset panel
         ) # close main panel
 
@@ -170,6 +175,21 @@ server <- function(input, output, session) {
     output$rc_descriptive_contents <- renderPrint({
         rc_descriptives()
     })
+
+
+#### Display Probabilities and Tables ####
+
+### Tables
+
+    output$rc_tables_contents <- renderPrint({
+        rc_tables()
+    })
+
+### Probabilities
+# output$rc_avg_prob_contents <- renderPrint({
+#     rc_avg_prob()
+# })
+
 
     ######## Sidebar interface for selecting function arguments
     observe({
@@ -264,7 +284,6 @@ server <- function(input, output, session) {
         })
     }) ## Close button2
 
-
     rc_descriptives <<-reactive({
         Recounter2(behaviorstream(),
                    input$beh_var,
@@ -272,6 +291,14 @@ server <- function(input, output, session) {
                    actor = NULL,
                    missing_data = NULL)$descriptive_statistics
     })
+
+
+
+    ## Recounted Tables ##
+rc_tables <<- reactive({
+    tables_recount_table(rc_df)
+})
+
 
     ### Group Analysis #################
     observeEvent(c(input$button3,input$beh_var,input$reinf_var,input$beh_stream, input$group_var),{
