@@ -97,7 +97,7 @@ actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
                         tabPanel("Mean Change Plot", plotOutput("mean_plot_contents")),## should change the name - did not test yet
                         tabPanel("Overall Sequence Plot", plotOutput("sequence_plot_contents")), ## should change the name - did not test yet
                         tabPanel("Recounted Descriptives",verbatimTextOutput("rc_descriptive_contents")), # should be vanilla ...
-                        tabPanel("Recounted Table",verbatimTextOutput("rc_descriptive_contents")), # should be vanilla only for the base recounted table
+                        tabPanel("Recounted Table",verbatimTextOutput("rc_tables_contents")) # should be vanilla only for the base recounted table
 
             ) # close tabset panel
         ) # close main panel
@@ -296,7 +296,7 @@ server <- function(input, output, session) {
 
     ## Recounted Tables ##
 rc_tables <<- reactive({
-    tables_recount_table(rc_df)
+    tables_recount_table(rc_df())$output_list
 })
 
 
