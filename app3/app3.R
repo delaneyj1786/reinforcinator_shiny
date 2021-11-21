@@ -349,9 +349,10 @@ rc_tables <<- reactive({
         descriptives_group <<- reactive({
             group_split_recounter_desc(
                 split_df(),
-                input$behav_stream,
+                input$beh_stream,
                 input$beh_var,
-                input$reinf_var
+                input$reinf_var,
+                actor = NULL
                 )
         })
 
