@@ -344,7 +344,6 @@ rc_tables <<- reactive({
 
 
 ## group descriptive statistics here
-
         ## need to add in the rest of args ...
         descriptives_group <<- reactive({
             group_split_recounter_desc(
@@ -352,7 +351,7 @@ rc_tables <<- reactive({
                 input$beh_stream,
                 input$beh_var,
                 input$reinf_var,
-                actor = NULL
+                input$group_var
                 )
         })
 
