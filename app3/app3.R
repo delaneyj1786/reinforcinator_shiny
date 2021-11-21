@@ -334,6 +334,15 @@ rc_tables <<- reactive({
             )
         })
 
+
+
+## group descriptive statistics here
+
+        descriptives_group <<- reactive({
+            group_split_recounter_desc(split_df())
+        })
+
+
     }) ## Close button2
 
 
