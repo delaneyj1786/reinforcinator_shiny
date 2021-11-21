@@ -98,7 +98,7 @@ actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
                         tabPanel("Overall Sequence Plot", plotOutput("sequence_plot_contents")), ## should change the name - did not test yet
                         tabPanel("Overall Data Descriptives",verbatimTextOutput("descriptive_contents")), # should be vanilla ...
                         tabPanel("Recounted Table",verbatimTextOutput("rc_tables_contents")), # should be vanilla only for the base recounted table
-                        tabPanel("Grouped Data Descriptives ",verbatimTextOutput("descriptive_contents_group")), # should be vanilla only for the base recounted table
+                        tabPanel("Grouped Data Descriptives ",verbatimTextOutput("descriptive_contents_group")) # should be vanilla only for the base recounted table
 
             ) # close tabset panel
         ) # close main panel
