@@ -335,7 +335,6 @@ rc_tables <<- reactive({
              plotting_restructure(rc_df())
 
          })
-
          # Create Overall GGplot
          run_plot <<- reactive({
              # Thus the average value changes for each sub-series (e.g., Before [red] takes over)
@@ -347,7 +346,7 @@ rc_tables <<- reactive({
          })
      }) ## Close ObserveEvent
 
-## Mean Plot
+## Mean Sub-Series Plot
     observeEvent(c(input$run_meanplot),{
         # Create Plot Data (RC DF)
         # Overall
@@ -371,38 +370,36 @@ rc_tables <<- reactive({
         })
     }) ## Close ObserveEvent
 
-    #### Overall Sequence Plot
-
+## Overall Mean Plot
     observeEvent(c(input$run_sequenceplot),{
 
-        # create data for plotting
+        # Create Plot Data
+        # Overall
         plot_dat <<-reactive({
             plotting_restructure(rc_df())
-
         })
 
-        # create aggregate data
+        # Aggregate Sub Group Data
+        # Overall
         plot_dat2 <<- reactive({
             plot_dat() %>% group_by(sub_series, recount_sequence) %>%
                 summarize(sub_series_mean = mean(sub_series_run_prob)) %>% ungroup()
         })
 
-
-        # create summary across sub-series
+        # Aggregate Across Sub-series
+        # Overall
         overall_average <<- reactive({
             plot_dat2() %>%
                 group_by(recount_sequence) %>%
                 summarize(mean_sub_mean = mean(sub_series_mean)) %>% ungroup() %>% filter(recount_sequence != "R")
 
         })
-
-        # merge the data frames
-
+        # Merge Plot Dat (original) with Overall Agregate (Collapsed Plot_dat2)
          average_df<<- reactive({
              left_join(plot_dat(), overall_average(), by = "recount_sequence")
              })
 
-         # create actual ggplot
+         # Create Sequence Average Plot
          sequence_plot <<- reactive({
         ggplot(average_df(),aes(x = recount_stream_index, y = sub_series_run_prob, color = (recount_sequence))) + geom_point() + geom_line(aes(y = mean_sub_mean)) +
             ggtitle("Overall Sequence Average") +
@@ -411,11 +408,11 @@ rc_tables <<- reactive({
          })
 
 
-    }) ## Close button2
+    }) ## Close ObserveEvent
 
 
-##################
-    # Download Recounted DF
+#### Downloading ####
+    # Download Recounted DF (Overall)
     output$downloadData <- downloadHandler(
         filename = function() {
             paste("data-", Sys.Date(), ".csv", sep="")
@@ -424,8 +421,6 @@ rc_tables <<- reactive({
             write.csv(rc_df(), file)
         }
     )
-
-
     # Download 1 group
     output$downloadData_1group <- downloadHandler(
         filename = function() {
@@ -435,8 +430,6 @@ rc_tables <<- reactive({
             write.csv(recount_split_df(), file)
         }
     )
-
-
     # Download 2 group
     output$downloadData_2group <- downloadHandler(
         filename = function() {
@@ -446,8 +439,7 @@ rc_tables <<- reactive({
             write.csv(recount_split_df2(), file)
         }
     )
-
-}
+} # Close Server
 
 # Run the application
 shinyApp(ui = ui, server = server)
