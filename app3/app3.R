@@ -106,15 +106,15 @@ actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
         )   # close sidebar layout
 ) # close UI fluid
 
-# Define server logic required to draw a histogram
+#### SERVER LOGIC ####
 server <- function(input, output, session) {
 
+## Load User CSV
     csv<<-reactive({
-        #      if(!exists(input$file1)) return()
         read_csv(input$file1$datapath)
     })
 
-
+## Pre Load Data
     ### alternative w/pre load
     dat1<-eventReactive(input$button1,{
         switch(input$dataset,
@@ -128,81 +128,59 @@ server <- function(input, output, session) {
 
     })
 
-
-    ### Display Data Frames ####
-    # Display Original Data
+### Display Data Frames ####
+##  Display Original Data
     output$contents <- renderTable({
         dat1()
     })
-
-    # Display reinforcer data
+## Display recounted data
     output$contents_rc <- renderTable({
         rc_df()
     })
-
-    # Display recounted group split df
+## Display recounted group split df
     output$contents_rcsplit_df <- renderTable({
         recount_split_df()
     })
-
-    # Display 2 recounted group split df
+## Display 2 recounted group split df
     output$contents_rcsplit_df2 <- renderTable({
         recount_split_df2()
     })
-
-    # Display plot data
+## Display plot data
     output$contents_plot_dat <- renderTable({
         plot_dat()
     })
-
-
-#### Display Plots ####
-    ############### PLOTS #####
-
+### Display Plots ####
+## Running Plot
     output$run_plot_contents <- renderPlot({
         run_plot()  ## did not add to server yet
     })
-
+## Sub Series Plot
     output$mean_plot_contents <- renderPlot({
         mean_plot()
     })
-
+## Overall Sequence Average plots
     output$sequence_plot_contents <- renderPlot({
         sequence_plot()
     })
-
-
-#### Display Summary RC ####
+### Display Descriptive Stats ####
+## Overall
     output$descriptive_contents <- renderPrint({
         descriptives()
     })
 
-## summary descriptives for group
+## Group Based Descriptives
     output$descriptive_contents_group <- renderPrint({
         descriptives_group()
     })
-
-
-
-
-#### Display Probabilities and Tables ####
+### Display Recounted Probabilities  ####
 
 ### Tables
-
     output$rc_tables_contents <- renderPrint({
         rc_tables()
     })
 
-### Probabilities
-# output$rc_avg_prob_contents <- renderPrint({
-#     rc_avg_prob()
-# })
-
-
-    ######## Sidebar interface for selecting function arguments
+#### Sidebar interface ####
     observe({
-        # requires file 1
-        #    req(input$file1)
         dsnames <- names(dat1())
         cb_options <- list()
         cb_options[dsnames] <- dsnames
