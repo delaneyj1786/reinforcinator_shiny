@@ -8,11 +8,12 @@ ui <- fluidPage(
     titlePanel("Old Faithful Geyser Data"),
 
         # Show a plot of the generated distribution
-            tabsetPanel(
-                id = "selectedtab",
-                tabPanel("Tab1", uiOutput("Tab1"),
-                tabPanel("Tab2", uiOutput("Tab2"))
-                )
+            tabPanel("Test",
+                     tabsetPanel(
+                         tabPanel("First",
+                                  fluidRow)
+                     )
+
             )
         )
 
