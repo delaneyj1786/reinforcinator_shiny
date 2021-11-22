@@ -17,10 +17,6 @@ install_github("delaneyj1786/REINFORCINATOR")
 library(ReenforcinateR)
 library(tidyverse)
 
-## Needs a pipeline
-# No group?: Then use recounter or recounter 2
-# Group - split and apply on list
-
 ui <- fluidPage(
 
     # Application title
@@ -180,6 +176,7 @@ server <- function(input, output, session) {
     })
 
 #### Sidebar interface ####
+## Behavior Stream
     observe({
         dsnames <- names(dat1())
         cb_options <- list()
@@ -188,11 +185,9 @@ server <- function(input, output, session) {
                           label = NULL,
                           choices = cb_options,
                           selected = "")
-    }) ### Close for behavior stream variable
-
-
-    # update behavior options based on column levels
-    # https://stackoverflow.com/questions/47248534/dynamically-list-choices-for-selectinput-from-a-user-selected-column
+    })
+## Behavior var (based on behavior stream levels)
+# https://stackoverflow.com/questions/47248534/dynamically-list-choices-for-selectinput-from-a-user-selected-column
     observeEvent(input$beh_stream,{
         column_levels <- as.character(sort(unique(dat1()[[input$beh_stream]])))
         updateSelectInput(session, "beh_var",
@@ -200,24 +195,16 @@ server <- function(input, output, session) {
                           choices =  column_levels ,
                           selected = "Nothing Selected")
     })
-
-    # Update for consequence
-    observeEvent(input$beh_stream,{
+## Consequence Var
+    observeEvent(input$beh_stream,{ # Probably redundant
         column_levels <- as.character(sort(unique(dat1()[[input$beh_stream]])))
-
-
         updateSelectInput(session, "reinf_var",
                           label = NULL,
                           choices =  column_levels ,
                           selected = "Nothing Selected")
     })
-
-
-
-    # Group name column
+## Group names (single group)
     observe({
-        # requires file 1
-        #    req(input$file1)
         dsnames <- names(dat1())
         cb_options <- list()
         cb_options[dsnames] <- dsnames
@@ -225,13 +212,9 @@ server <- function(input, output, session) {
                           label = NULL,
                           choices = cb_options,
                           selected = "")
-    }) ### Close for behavior stream variable
-
-
-    # Group 2 name column
+    })
+## Group names (two groups)
     observe({
-        # requires file 1
-        #    req(input$file1)
         dsnames <- names(dat1())
         cb_options <- list()
         cb_options[dsnames] <- dsnames
@@ -239,28 +222,15 @@ server <- function(input, output, session) {
                           label = NULL,
                           choices = cb_options,
                           selected = "")
-    }) ### Close for behavior stream variable
+    })
 
-###### CLEAN DATA ########
-    # # Filter out NA values
-          # dat1 <<- eventReactive(input$button1, {
-          #      tidyr::drop_na(dat1())
-          #        })
-
-
-
-    ## Activate reinforcer ####
-    ### Overall Analysis #################
+#### Activate Reinforcinator (Overall Analysis) ####
     observeEvent(c(input$button2,input$beh_var,input$reinf_var,input$beh_stream),{
-
-
-        # create data frame
+        # Create Behavior Stream
         behaviorstream<<-eventReactive(input$button2,{
             (((dat1()[[input$beh_stream]])))
-        }) # close behavior stream
-
-
-        # create rc_df
+        })
+        # Create RC Df
         rc_df<<-reactive({
             Recounter2(behaviorstream(),
                        input$beh_var,
@@ -268,8 +238,9 @@ server <- function(input, output, session) {
                        actor = NULL,
                        missing_data = NULL)$recounted_data_frame
         })
-    }) ## Close button2
+    }) # End observeEvent
 
+## Overall Descriptives
     descriptives <<-reactive({
         Recounter2(behaviorstream(),
                    input$beh_var,
@@ -277,27 +248,19 @@ server <- function(input, output, session) {
                    actor = NULL,
                    missing_data = NULL)$descriptive_statistics
     })
-
-
-
-    ## Recounted Tables ##
-    #### for overall ####
+## Recounted Tables (Overall Analysis)
 rc_tables <<- reactive({
     tables_recount_table(rc_df())$output_list
 })
 
-
-    ### Group Analysis #################
+#### Activate Reinforcinator (Group 1 Analysis) ####
     observeEvent(c(input$button3,input$beh_var,input$reinf_var,input$beh_stream, input$group_var),{
 
-        # create data frame
+        # Create Behavior Stream
         behaviorstream<<-eventReactive(input$button3,{
             (((dat1()[[input$beh_stream]])))
-        }) # close behavior stream
-
-
-
-        # create split_df
+        })
+        # Create Split DF (1 group)
         split_df<<-reactive({
             group_splitter(dat1(),
                        behaviorstream(),
@@ -306,9 +269,7 @@ rc_tables <<- reactive({
                        input$group_var,
                        actor = NULL)
         })
-
-
-# We just need the character input ... not the actual stream ..
+        # Create Recount Split DF (1 group)
         recount_split_df<<-reactive({
             group_split_recounter(
                 split_df(),
@@ -319,10 +280,7 @@ rc_tables <<- reactive({
             )
         })
 
-
-
-## group descriptive statistics here
-        ## need to add in the rest of args ...
+        # Create Descriptives (1 group)
         descriptives_group <<- reactive({
             group_split_recounter_desc(
                 split_df(),
@@ -334,19 +292,17 @@ rc_tables <<- reactive({
         })
 
 
-    }) ## Close button2
+    }) ## Close ObserveEvent
 
-
-    #
-    # ### Group Analysis 2 #################
+#### Activate Reinforcinator (Two Group Analysis) ####
     observeEvent(c(input$button4,input$beh_var,input$reinf_var,input$beh_stream, input$group_var, input$group_var2),{
 
-        # create data frame
+        # Create Behavior Stream
         behaviorstream<<-eventReactive(input$button4,{
             (((dat1()[[input$beh_stream]])))
         }) # close behavior stream
 
-        # create split_df
+        # Create Split DF (2 group)
         split_df2<<-reactive({
             group_splitter2(dat1(),
                            behaviorstream(),
@@ -357,7 +313,7 @@ rc_tables <<- reactive({
                         filt = TRUE)
         })
 
-
+        # Create Recount DF (2 group)
         recount_split_df2<<-reactive({
             group_split_recounter(
                 split_df2(),
@@ -368,21 +324,19 @@ rc_tables <<- reactive({
             )
         })
 
-    }) ## Close button2
+    }) ## ObserveEvent
 
-
-######## Plotting Functions ######
-    # ### Run Plot (change name) #################
+#### Plotting ####
+## Run Plot (change name)
     observeEvent(c(input$run_runplot),{
-
-         # create data for plotting
+         # Create Plot Data (RC DF)
+         # Overall
          plot_dat <<-reactive({
              plotting_restructure(rc_df())
 
          })
 
-
-         # create actual ggplot
+         # Create Overall GGplot
          run_plot <<- reactive({
              # Thus the average value changes for each sub-series (e.g., Before [red] takes over)
              ggplot(plot_dat(),aes(x = recount_stream_index, y = sub_series_run_prob,
@@ -391,35 +345,31 @@ rc_tables <<- reactive({
                  xlab("Observation Sequence") +
                  ylab("Running Probability")
          })
+     }) ## Close ObserveEvent
 
-     }) ## Close button2
-
-    # ### Mean Plot  #################
+## Mean Plot
     observeEvent(c(input$run_meanplot),{
-
-        # create data for plotting
+        # Create Plot Data (RC DF)
+        # Overall
         plot_dat <<-reactive({
             plotting_restructure(rc_df())
 
         })
-
-        # create aggregate data
+        # Aggregate Sub Group Data
+        # Overall
         plot_dat2 <<- reactive({
             plot_dat() %>% group_by(sub_series, recount_sequence) %>%
                 summarize(sub_series_mean = mean(sub_series_run_prob)) %>% ungroup()
         })
 
-        # create actual ggplot
+        # Create Sub-Series Average Plot
         mean_plot <<- reactive({
-            # Thus the average value changes for each sub-series (e.g., Before [red] takes over)
             ggplot(filter(plot_dat2(), recount_sequence != "R"),aes(x = sub_series, y = sub_series_mean, color = (recount_sequence))) + geom_point() + geom_line() +
                 ggtitle("Average Sub-Series Probabilities By Sequence") +
                 xlab("Sub-Series") +
                 ylab("Average Sequence Probabilities")
-
         })
-
-    }) ## Close button2
+    }) ## Close ObserveEvent
 
     #### Overall Sequence Plot
 
