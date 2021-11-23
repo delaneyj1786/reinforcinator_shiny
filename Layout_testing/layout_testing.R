@@ -7,7 +7,7 @@ ui <- fluidPage(
     titlePanel("Mock App"),
 
     tabsetPanel(
-        tabPanel("Chemistry",
+        tabPanel("Plots",
                  tabsetPanel(
                      tabPanel("First",
                               fluidRow(
