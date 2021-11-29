@@ -106,6 +106,16 @@ actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
 #### SERVER LOGIC ####
 server <- function(input, output, session) {
 
+## UI Tabs
+    output$Tab1 <- renderUI({
+        tabsetPanel(id = "sub_tab_one",
+                    tabPanel("Data",tableOutput("contents")),
+        tabPanel("Recounted Data",tableOutput("contents_rc")),
+        tabPanel("Recounted Group",tableOutput("contents_rcsplit_df")),
+        tabPanel("Recounted 2 Group",tableOutput("contents_rcsplit_df2")))
+    })
+
+
 ## Load User CSV
     csv<<-reactive({
         read_csv(input$file1$datapath)
