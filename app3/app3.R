@@ -84,10 +84,11 @@ actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
         # Show a plot of the generated distribution
         mainPanel(
             tabsetPanel(position = "above",
-                        tabPanel("Data",tableOutput("contents")),
-                        tabPanel("Recounted Data",tableOutput("contents_rc")),
-                        tabPanel("Recounted Group",tableOutput("contents_rcsplit_df")),
-                        tabPanel("Recounted 2 Group",tableOutput("contents_rcsplit_df2")),
+                        tabPanel("Data Sets", uiOutput("Tab1")),
+#                       tabPanel("Data",tableOutput("contents")),
+#                       tabPanel("Recounted Data",tableOutput("contents_rc")),
+#                       tabPanel("Recounted Group",tableOutput("contents_rcsplit_df")),
+#                       tabPanel("Recounted 2 Group",tableOutput("contents_rcsplit_df2")),
                         tabPanel("Plot Dat", tableOutput("contents_plot_dat")),
                         tabPanel("Running Plot",  plotOutput("run_plot_contents")),
                         tabPanel("Mean Change Plot", plotOutput("mean_plot_contents")),## should change the name - did not test yet
