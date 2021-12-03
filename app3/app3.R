@@ -86,6 +86,7 @@ actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
             tabsetPanel(position = "above",
                         tabPanel("Data Sets", uiOutput("Tab1")),
                         tabPanel("Plots", uiOutput("Tab2")),
+#                        tabPanel("Descriptives", UiOutput("Tab3")), # inset descriptve and rc_table and descriptive group
                         tabPanel("Overall Data Descriptives",verbatimTextOutput("descriptive_contents")), # should be vanilla ...
                         tabPanel("Recounted Table",verbatimTextOutput("rc_tables_contents")), # should be vanilla only for the base recounted table
                         tabPanel("Grouped Data Descriptives ",verbatimTextOutput("descriptive_contents_group")) # should be vanilla only for the base recounted table
