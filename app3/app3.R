@@ -85,10 +85,7 @@ actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
         mainPanel(
             tabsetPanel(position = "above",
                         tabPanel("Data Sets", uiOutput("Tab1")),
-                        tabPanel("Plot Dat", tableOutput("contents_plot_dat")),
-                        tabPanel("Running Plot",  plotOutput("run_plot_contents")),
-                        tabPanel("Mean Change Plot", plotOutput("mean_plot_contents")),## should change the name - did not test yet
-                        tabPanel("Overall Sequence Plot", plotOutput("sequence_plot_contents")), ## should change the name - did not test yet
+                        tabPanel("Plots", uiOutput("Tab2")),
                         tabPanel("Overall Data Descriptives",verbatimTextOutput("descriptive_contents")), # should be vanilla ...
                         tabPanel("Recounted Table",verbatimTextOutput("rc_tables_contents")), # should be vanilla only for the base recounted table
                         tabPanel("Grouped Data Descriptives ",verbatimTextOutput("descriptive_contents_group")) # should be vanilla only for the base recounted table
@@ -113,8 +110,13 @@ server <- function(input, output, session) {
 
 
 ## PLOT Tabs
-
-
+    output$Tab2 <- renderUI({
+    tabsetPanel(id = "sub_tab_two",
+    tabPanel("Plot Dat", tableOutput("contents_plot_dat")),
+    tabPanel("Running Plot",  plotOutput("run_plot_contents")),
+    tabPanel("Mean Change Plot", plotOutput("mean_plot_contents")),## should change the name - did not test yet
+    tabPanel("Overall Sequence Plot", plotOutput("sequence_plot_contents"))) ## should change the name - did not test yet
+})
 
 ## Load User CSV
     csv<<-reactive({
