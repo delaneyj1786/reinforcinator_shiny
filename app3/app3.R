@@ -112,6 +112,10 @@ server <- function(input, output, session) {
     })
 
 
+## PLOT Tabs
+
+
+
 ## Load User CSV
     csv<<-reactive({
         read_csv(input$file1$datapath)
