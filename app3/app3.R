@@ -86,10 +86,7 @@ actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
             tabsetPanel(position = "above",
                         tabPanel("Data Sets", uiOutput("Tab1")),
                         tabPanel("Plots", uiOutput("Tab2")),
-#                        tabPanel("Descriptives", UiOutput("Tab3")), # inset descriptve and rc_table and descriptive group
-                        tabPanel("Overall Data Descriptives",verbatimTextOutput("descriptive_contents")), # should be vanilla ...
-                        tabPanel("Recounted Table",verbatimTextOutput("rc_tables_contents")), # should be vanilla only for the base recounted table
-                        tabPanel("Grouped Data Descriptives ",verbatimTextOutput("descriptive_contents_group")) # should be vanilla only for the base recounted table
+                        tabPanel("Descriptives", uiOutput("Tab3")) # inset descriptve and rc_table and descriptive group
 
             ) # close tabset panel
         ) # close main panel
@@ -118,6 +115,17 @@ server <- function(input, output, session) {
     tabPanel("Mean Change Plot", plotOutput("mean_plot_contents")),## should change the name - did not test yet
     tabPanel("Overall Sequence Plot", plotOutput("sequence_plot_contents"))) ## should change the name - did not test yet
 })
+
+
+## Data Tabs
+    output$Tab3 <- renderUI({
+        tabsetPanel(id = "sub_tab_three",
+                    tabPanel("Overall Data Descriptives",verbatimTextOutput("descriptive_contents")), # should be vanilla ...
+                    tabPanel("Recounted Table",verbatimTextOutput("rc_tables_contents")), # should be vanilla only for the base recounted table
+                    tabPanel("Grouped Data Descriptives ",verbatimTextOutput("descriptive_contents_group")) # should be vanilla only for the base recounted table
+        )
+    })
+
 
 ## Load User CSV
     csv<<-reactive({
