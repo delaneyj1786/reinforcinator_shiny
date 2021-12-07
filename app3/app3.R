@@ -72,9 +72,10 @@ ui <- fluidPage(
             actionButton("button2", "Run Overall Analysis"), br(), # no group
             actionButton("button3", "Run Group Analysis"), br(), # grouping
             actionButton("button4", "Run 2 Group Analysis"), br(), # grouping by two
-actionButton("run_runplot", "Run Running Plot"), br(),
-actionButton("run_meanplot", "Run Mean Plot"), br(),
-actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
+# actionButton("run_runplot", "Run Running Plot"), br(),
+# actionButton("run_meanplot", "Run Mean Plot"), br(),
+# actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
+            actionButton("run_plots", "Run Plots"), br(),
 
             downloadLink("downloadData", "Download Recounted Data File"), br(),
             downloadLink("downloadData_1group", "Download Recounted Group Data File"), br(),
