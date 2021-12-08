@@ -411,7 +411,6 @@ rc_tables <<- reactive({
 
 
     }) ## Close ObserveEvent
-}) ## Close ObserveEven
 
 #### Downloading ####
     # Download Recounted DF (Overall)
