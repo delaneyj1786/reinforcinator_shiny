@@ -64,7 +64,7 @@ ui <- fluidPage(
             selectInput(inputId = "group_var2",
                         label = "Select Second Group Variable:",
                         choices = "Nothing Selected"),
-
+run_plots
 
 ## Need 1) partner rcounter 2) deleter 3) combiner
 
@@ -75,7 +75,7 @@ ui <- fluidPage(
 # actionButton("run_runplot", "Run Running Plot"), br(),
 # actionButton("run_meanplot", "Run Mean Plot"), br(),
 # actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
-            actionButton("run_plots", "Run Plots"), br(),
+            actionButton("", "Run Plots"), br(),
 
             downloadLink("downloadData", "Download Recounted Data File"), br(),
             downloadLink("downloadData_1group", "Download Recounted Group Data File"), br(),
@@ -277,7 +277,8 @@ rc_tables <<- reactive({
 })
 
 #### Activate Reinforcinator (Group 1 Analysis) ####
-    observeEvent(c(input$button3,input$beh_var,input$reinf_var,input$beh_stream, input$group_var),{
+    observeEvent(c(input$button3,input$beh_var,
+                   input$reinf_var,input$beh_stream, input$group_var),{
 
         # Create Behavior Stream
         behaviorstream<<-eventReactive(input$button3,{
@@ -318,7 +319,8 @@ rc_tables <<- reactive({
     }) ## Close ObserveEvent
 
 #### Activate Reinforcinator (Two Group Analysis) ####
-    observeEvent(c(input$button4,input$beh_var,input$reinf_var,input$beh_stream, input$group_var, input$group_var2),{
+    observeEvent(c(input$button4,input$beh_var,input$reinf_var,input$beh_stream,
+                   input$group_var, input$group_var2),{
 
         # Create Behavior Stream
         behaviorstream<<-eventReactive(input$button4,{
@@ -351,7 +353,7 @@ rc_tables <<- reactive({
 
 #### Plotting ####
 ## Run Plot (change name)
-    observeEvent(c(input$run_runplot),{
+    observeEvent(c(input$run_plots),{
          # Create Plot Data (RC DF)
          # Overall
          plot_dat <<-reactive({
@@ -370,7 +372,7 @@ rc_tables <<- reactive({
      }) ## Close ObserveEvent
 
 ## Mean Sub-Series Plot
-    observeEvent(c(input$run_meanplot),{
+    observeEvent(c(input$run_plots),{
         # Create Plot Data (RC DF)
         # Overall
         plot_dat <<-reactive({
@@ -394,7 +396,7 @@ rc_tables <<- reactive({
     }) ## Close ObserveEvent
 
 ## Overall Mean Plot
-    observeEvent(c(input$run_sequenceplot),{
+    observeEvent(c(input$run_plots),{
 
         # Create Plot Data
         # Overall
