@@ -64,7 +64,6 @@ ui <- fluidPage(
             selectInput(inputId = "group_var2",
                         label = "Select Second Group Variable:",
                         choices = "Nothing Selected"),
-run_plots
 
 ## Need 1) partner rcounter 2) deleter 3) combiner
 
@@ -75,7 +74,7 @@ run_plots
 # actionButton("run_runplot", "Run Running Plot"), br(),
 # actionButton("run_meanplot", "Run Mean Plot"), br(),
 # actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
-            actionButton("", "Run Plots"), br(),
+            actionButton("run_plots", "Run Plots"), br(),
 
             downloadLink("downloadData", "Download Recounted Data File"), br(),
             downloadLink("downloadData_1group", "Download Recounted Group Data File"), br(),
