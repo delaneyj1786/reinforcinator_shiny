@@ -368,16 +368,8 @@ rc_tables <<- reactive({
                  xlab("Observation Sequence") +
                  ylab("Running Probability")
          })
-     }) ## Close ObserveEvent
 
 ## Mean Sub-Series Plot
-    observeEvent(c(input$run_plots),{
-        # Create Plot Data (RC DF)
-        # Overall
-        plot_dat <<-reactive({
-            plotting_restructure(rc_df())
-
-        })
         # Aggregate Sub Group Data
         # Overall
         plot_dat2 <<- reactive({
@@ -392,24 +384,10 @@ rc_tables <<- reactive({
                 xlab("Sub-Series") +
                 ylab("Average Sequence Probabilities")
         })
-    }) ## Close ObserveEvent
 
 ## Overall Mean Plot
-    observeEvent(c(input$run_plots),{
-
         # Create Plot Data
-        # Overall
-        plot_dat <<-reactive({
-            plotting_restructure(rc_df())
-        })
-
         # Aggregate Sub Group Data
-        # Overall
-        plot_dat2 <<- reactive({
-            plot_dat() %>% group_by(sub_series, recount_sequence) %>%
-                summarize(sub_series_mean = mean(sub_series_run_prob)) %>% ungroup()
-        })
-
         # Aggregate Across Sub-series
         # Overall
         overall_average <<- reactive({
@@ -433,7 +411,7 @@ rc_tables <<- reactive({
 
 
     }) ## Close ObserveEvent
-
+}) ## Close ObserveEven
 
 #### Downloading ####
     # Download Recounted DF (Overall)
