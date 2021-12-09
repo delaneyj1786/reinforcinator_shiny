@@ -83,6 +83,40 @@ ui <- fluidPage(
 
         # Show a plot of the generated distribution
         mainPanel(
+            h1("Instructions"),
+            br(),
+            h2("Inputting Data"),
+            "The user has two options for inputting data : inputting their own dataset (Choose CSV file) or using
+            a built-in data set from the Reenforcinator R package (choose dataset). After selecting one of these options, the user
+            MUST CLICK ON 'Confirm Data Selection' button for the dataset to load for analysis.",
+            br(),
+            "1. Choose a CSV File : Click on the drop down menu to select a file from your hard-drive.
+            The file MUST be csv format.",
+            br(),
+            "2. Choose a dataset : Click on the drop-down menu to select
+            one of the 7 pre-loaded datasets ",
+            br(),
+            h2("Selecting Variables (Basic Analysis)"),
+            br(),
+            "1. Select Behavior Stream Column : This is the column of the dataframe that contains behaviorall
+            observations (i.e., observations of the Independent and Dependent variables).",
+            br(),
+            "2. Select Target Behavior (DV): This is the code pertaining to the 'reinforced behavior', that is, the behavior expected to
+            change as a function of reinforcement.",
+            br(),
+            "3. Select Target Consequence (IV): This is the code pertaining to the 'putative reinforcer', the event that is
+            expected to change the trajectory of the Dependent variable.",
+            h2("Selecting Variables (Group Analysis)"),
+            br(),
+            "In addition to the overall analysis, the Re-enforcinator allows users to calculate change within clusters of observations.
+            In a single group analysis, reinforcement is calculated within each unique value of the grouping variable. For example,
+            in the Two_Person dataset, the user can look for reinforcement in each separate Video (i.e., VIDELT).
+            A two-group analysis extends this idea to two clustering variables. For example, in the two-person dataset, the two-group analysis can calculate
+            reinforcement separately for each VIDLET WITHIN each unique Target individual (using the 'TAR' variable). ",
+            br(),
+            "1. Select Group Variable: Click on this tab to select the column pertaining to a grouping variable (i.e., video segment or user ID).",
+            br(),
+            "2. Select Second Group Variable: Click on this tab to select the column pertaining to a second grouping variable (i.e., Target ID)",
             tabsetPanel(position = "above",
                         tabPanel("Data Sets", uiOutput("Tab1")),
                         tabPanel("Plots", uiOutput("Tab2")),
