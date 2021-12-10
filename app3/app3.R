@@ -88,30 +88,20 @@ ui <- fluidPage(
             h2("Input Sidebar (Left hand side)"),
             "The left hand panel contains drop-down menus for the user to select the dataset and variables for their reinforcer analysis.",
             br(),
-            "The user must select 'Confirm Data Selection' after choosing a dataset. The user then must click on ",
+            "The user must select 'Confirm Data Selection' after choosing a dataset. The user then must click on
+            (1) Run overall analsis for an overall reinforcer analysis or (2) Run Group Analysis (for a single cluster variable) or (3) Run Two-Group analysis (for 2 cluster variables)",
             br(),
-            "2. Choose a dataset : Click on the drop-down menu to select
-            one of the 7 pre-loaded datasets ",
+            h2("Output Tabs"),
             br(),
-            h2("Selecting Variables (Basic Analysis)"),
+            "The output is divided into 3 sections. ",
             br(),
-            "1. Select Behavior Stream Column : This is the column ofthe dataframe that contains behaviorall
-            observations (i.e., observations of the Independent and Dependent variables).",
+            "Datasets : The purpose of this tab is to allow users to see that actual data anlyzed by the reinforcinator. The user can
+            download each dataset by clicking on its corresponding link on the left hand sidebar.
+            This tab contains (1) Data : a printout of the original data (see 'Data'), (2) Recounted Data : a printout of the transformed data which sorts behaviors before and after reinforcement,
+            (3) Recounted Group Data: a printout of the transformed data with respect to a single clustering / grouping variable and (4) Recounted 2 Group : a printout
+            of the transformed data with respect to a double clustering / grouping variable.",
             br(),
-            "2. Select Target Behavior (DV): This is the code pertaining to the 'reinforced behavior', that is, the behavior expected to
-            change as a function of reinforcement.",
-            br(),
-            "3. Select Target Consequence (IV): This is the code pertaining to the 'putative reinforcer', the event that is
-            expected to change the trajectory of the Dependent variable.",
-            h2("Selecting Variables (Group Analysis)"),
-            br(),
-            "In addition to the overall analysis, the Re-enforcinator allows users to calculate change within clusters of observations.
-            In a single group analysis, reinforcement is calculated within each unique value of the grouping variable. For example,
-            in the Two_Person dataset, the user can look for reinforcement in each separate Video (i.e., VIDELT).
-            A two-group analysis extends this idea to two clustering variables. For example, in the two-person dataset, the two-group analysis can calculate
-            reinforcement separately for each VIDLET WITHIN each unique Target individual (using the 'TAR' variable). ",
-            br(),
-            "1. Select Group Variable: Click on this tab to select the column pertaining to a grouping variable (i.e., video segment or user ID).",
+            "Plots : ",
             br(),
             "2. Select Second Group Variable: Click on this tab to select the column pertaining to a second grouping variable (i.e., Target ID)",
             tabsetPanel(position = "above",
