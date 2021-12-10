@@ -120,7 +120,8 @@ ui <- fluidPage(
             tabsetPanel(position = "above",
                         tabPanel("Data Sets", uiOutput("Tab1")),
                         tabPanel("Plots", uiOutput("Tab2")),
-                        tabPanel("Descriptives", uiOutput("Tab3")) # inset descriptve and rc_table and descriptive group
+                        tabPanel("Descriptives", uiOutput("Tab3")),
+                        tabPanel("Instructions", uiOutput("Tab4")) # To have a separate text/only panel just for instructions
 
             ) # close tabset panel
         ) # close main panel
@@ -157,6 +158,15 @@ server <- function(input, output, session) {
                     tabPanel("Overall Data Descriptives",verbatimTextOutput("descriptive_contents")), # should be vanilla ...
                     tabPanel("Recounted Table",verbatimTextOutput("rc_tables_contents")), # should be vanilla only for the base recounted table
                     tabPanel("Grouped Data Descriptives ",verbatimTextOutput("descriptive_contents_group")) # should be vanilla only for the base recounted table
+        )
+    })
+
+    ## Data Tabs
+    output$Tab4 <- renderUI({
+        tabsetPanel(id = "sub_tab_four",
+                    tabPanel("Background",verbatimTextOutput("backround_text")), # should be vanilla ...
+                    tabPanel("Inputting Data",verbatimTextOutput("")), # should be vanilla only for the base recounted table
+                    tabPanel("Interpreting Output ",verbatimTextOutput("")) # should be vanilla only for the base recounted table
         )
     })
 
@@ -229,6 +239,12 @@ server <- function(input, output, session) {
 ### Tables
     output$rc_tables_contents <- renderPrint({
         rc_tables()
+    })
+
+### Text
+    output$backround_text <-renderText({
+
+        "INsert text here"
     })
 
 #### Sidebar interface ####
