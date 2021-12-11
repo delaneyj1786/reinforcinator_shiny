@@ -84,6 +84,7 @@ ui <- fluidPage(
         # Show a plot of the generated distribution
         mainPanel(
             h1("Navigation"),
+            "For detailed information for each of these topics, please see the 'Instructions' tab.",
             br(),
             h2("Input Sidebar (Left hand side)"),
             "The left hand panel contains drop-down menus for the user to select the dataset and variables for their reinforcer analysis.",
@@ -93,25 +94,31 @@ ui <- fluidPage(
             br(),
             h2("Output Tabs"),
             br(),
-            "The output is divided into 3 sections. ",
+  "          The output is divided into 3 sections / Panels",
             br(),
-            "Datasets : The purpose of this tab is to allow users to see that actual data anlyzed by the reinforcinator. The user can
+            h3("Datasets"),
+            br(),
+            "The purpose of this Panel is to allow users to see that actual data anlyzed by the reinforcinator. The user can
             download each dataset by clicking on its corresponding link on the left hand sidebar.
             This tab contains (1) Data : a printout of the original data (see 'Data'), (2) Recounted Data : a printout of the transformed data which sorts behaviors before and after reinforcement,
             (3) Recounted Group Data: a printout of the transformed data with respect to a single clustering / grouping variable and (4) Recounted 2 Group : a printout
             of the transformed data with respect to a double clustering / grouping variable.",
             br(),
-            "Plots : The plots tab contains 3 plots of the reinforcement data. The first tab (Plot Dat), shows the dataset used to create the 3 plots.
+            h3("Plots"),
+            "Plots : The plots Panel contains 3 plots of the reinforcement data. The first tab (Plot Dat), shows the dataset used to create the 3 plots.
             (1) Running Plot : Shows the running probability of the dependent variable across the observation series. (2) Mean change plot : This shows the average
             value of the DV before (in red) and after (in green), each reinforcer, (3) Overall Sequence plot : This shows the
             average value before (in red) and after (in green) across all reinforcers.",
             br(),
-            "2. Select Second Group Variable: Click on this tab to select the column pertaining to a second grouping variable (i.e., Target ID)",
+            h3("Statistics"),
+            "The Statistics Panel contains three tabs.  1) overall descriptives : This contains descriptive statistics regarding
+  the reinforcement dataset, 2) Recounted Table : This contains the contingency tables based off the reinforcement analysis,
+  3) Grouped descriptives : This contains descriptive statistics for a grouped based reinforcement analysis ",
             tabsetPanel(position = "above",
+                        tabPanel("Instructions", uiOutput("Tab4")),
                         tabPanel("Data Sets", uiOutput("Tab1")),
                         tabPanel("Plots", uiOutput("Tab2")),
-                        tabPanel("Descriptives", uiOutput("Tab3")),
-                        tabPanel("Instructions", uiOutput("Tab4")) # To have a separate text/only panel just for instructions
+                        tabPanel("Statistics", uiOutput("Tab3")) # To have a separate text/only panel just for instructions
 
             ) # close tabset panel
         ) # close main panel
