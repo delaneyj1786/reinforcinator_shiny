@@ -101,7 +101,10 @@ ui <- fluidPage(
             (3) Recounted Group Data: a printout of the transformed data with respect to a single clustering / grouping variable and (4) Recounted 2 Group : a printout
             of the transformed data with respect to a double clustering / grouping variable.",
             br(),
-            "Plots : ",
+            "Plots : The plots tab contains 3 plots of the reinforcement data. The first tab (Plot Dat), shows the dataset used to create the 3 plots.
+            (1) Running Plot : Shows the running probability of the dependent variable across the observation series. (2) Mean change plot : This shows the average
+            value of the DV before (in red) and after (in green), each reinforcer, (3) Overall Sequence plot : This shows the
+            average value before (in red) and after (in green) across all reinforcers.",
             br(),
             "2. Select Second Group Variable: Click on this tab to select the column pertaining to a second grouping variable (i.e., Target ID)",
             tabsetPanel(position = "above",
