@@ -162,8 +162,8 @@ server <- function(input, output, session) {
     output$Tab4 <- renderUI({
         tabsetPanel(id = "sub_tab_four",
                     tabPanel("Background",verbatimTextOutput("backround_text")), # should be vanilla ...
-                    tabPanel("Inputting Data",verbatimTextOutput("")), # should be vanilla only for the base recounted table
-                    tabPanel("Interpreting Output ",verbatimTextOutput("")) # should be vanilla only for the base recounted table
+                    tabPanel("Inputting Data",verbatimTextOutput("input_data")), # should be vanilla only for the base recounted table
+                    tabPanel("Interpreting Output ",verbatimTextOutput("interpret")) # should be vanilla only for the base recounted table
         )
     })
 
@@ -241,7 +241,13 @@ server <- function(input, output, session) {
 ### Text
     output$backround_text <-renderText({
 
-        "Inputting Data.
+        "Blah
+        "
+
+
+    })
+
+    output$input_data <- renderText({"Inputting Data.
 
         The user has two options for inputting data : inputting their own dataset (Choose CSV file) or using
         a built-in data set from the Reenforcinator R package (choose dataset). After selecting one of these options, the user
@@ -278,9 +284,9 @@ server <- function(input, output, session) {
             2. Select Second Group Variable: Click on this tab to select the column pertaining to a second grouping variable (i.e., Target ID)
 
         "
-
-
     })
+
+    output$interpret <- renderText({"interpret"})
 
 #### Sidebar interface ####
 ## Behavior Stream
