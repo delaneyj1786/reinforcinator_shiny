@@ -146,7 +146,7 @@ server <- function(input, output, session) {
     output$Tab2 <- renderUI({
     tabsetPanel(id = "sub_tab_two",
     tabPanel("Plot Dat", tableOutput("contents_plot_dat")),
-    tabPanel("Running Plot",  plotOutput("run_plot_contents")),
+    tabPanel("Running Plot",  plotlyOutput("run_plot_contents")),
     tabPanel("Mean Change Plot", plotlyOutput("mean_plot_contents")),## should change the name - did not test yet
     tabPanel("Overall Sequence Plot", plotlyOutput("sequence_plot_contents"))) ## should change the name - did not test yet
 })
@@ -213,8 +213,8 @@ server <- function(input, output, session) {
     })
 ### Display Plots ####
 ## Running Plot
-    output$run_plot_contents <- renderPlot({
-        run_plot()  ## did not add to server yet
+    output$run_plot_contents <- renderPlotly({
+        plotly::ggplotly(run_plot())  ## did not add to server yet
     })
 ## Sub Series Plot
     output$mean_plot_contents <- renderPlotly({
