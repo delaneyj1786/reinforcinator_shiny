@@ -44,6 +44,7 @@ ui <- fluidPage(
                                     "Neutral",
                                     "Punishment")),
             actionButton("button1", "Confirm Data Selection"),
+
             br(),
             selectInput(inputId = "beh_stream",
                         label = "Select Behavior Stream Column:",
@@ -58,20 +59,22 @@ ui <- fluidPage(
                         label = "Select Target Consequence (IV):",
                         choices = "Nothing Selected"),
 
+            actionButton("button2", "Run Overall Analysis"),
+            br(), # no group
+
             selectInput(inputId = "group_var",
                         label = "Select Group Variable:",
                         choices = "Nothing Selected"),
+            actionButton("button3", "Run Group Analysis"),
+            br(), # grouping
 
             selectInput(inputId = "group_var2",
                         label = "Select Second Group Variable:",
                         choices = "Nothing Selected"),
-
 ## Need 1) partner rcounter 2) deleter 3) combiner
 
-
-            actionButton("button2", "Run Overall Analysis"), br(), # no group
-            actionButton("button3", "Run Group Analysis"), br(), # grouping
-            actionButton("button4", "Run 2 Group Analysis"), br(), # grouping by two
+            actionButton("button4", "Run 2 Group Analysis"),
+br(), # grouping by two
 # actionButton("run_runplot", "Run Running Plot"), br(),
 # actionButton("run_meanplot", "Run Mean Plot"), br(),
 # actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
