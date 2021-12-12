@@ -16,6 +16,7 @@ library(devtools)
 install_github("delaneyj1786/REINFORCINATOR")
 library(ReenforcinateR)
 library(tidyverse)
+library(plotly)
 
 ui <- fluidPage(
 
