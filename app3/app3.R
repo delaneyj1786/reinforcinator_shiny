@@ -86,6 +86,8 @@ ui <- fluidPage(
             h1("Navigation"),
             "For detailed information for each of these topics, please see the 'Instructions' tab.",
             br(),
+            "To begin analysis, use the Input Sidebar to select the dataset and independent variables. All output
+            is accessed by the Panels on the bottom of the screen.",
             h2("Input Sidebar (Left hand side)"),
             "The left hand panel contains drop-down menus for the user to select the dataset and variables for their reinforcer analysis.",
             br(),
@@ -286,7 +288,23 @@ server <- function(input, output, session) {
         "
     })
 
-    output$interpret <- renderText({"interpret"})
+    output$interpret <- renderText({"
+    Interpreting Results
+
+    Recounted Tables
+
+    $avg_prob : These are the probabilities computed from the reinforcement (recounted) data
+         B_NT : The 'Before Reinforcement' probability of all non-target behaviors
+         B_T  : The 'Before Reinforcement' probability of the target behavior (DV)
+         A_NT : The 'After Reinforcement' probability of the non-target behaviors
+         A_T  : The 'After Reinforcement' probability of the target behavior (DV)
+         *note that (B_NT + B_T) = 1 AND (A_NT + A_T) = 1
+
+
+
+
+
+        "})
 
 #### Sidebar interface ####
 ## Behavior Stream
