@@ -147,8 +147,8 @@ server <- function(input, output, session) {
     tabsetPanel(id = "sub_tab_two",
     tabPanel("Plot Dat", tableOutput("contents_plot_dat")),
     tabPanel("Running Plot",  plotOutput("run_plot_contents")),
-    tabPanel("Mean Change Plot", plotOutput("mean_plot_contents")),## should change the name - did not test yet
-    tabPanel("Overall Sequence Plot", plotOutput("sequence_plot_contents"))) ## should change the name - did not test yet
+    tabPanel("Mean Change Plot", plotlyOutput("mean_plot_contents")),## should change the name - did not test yet
+    tabPanel("Overall Sequence Plot", plotlyOutput("sequence_plot_contents"))) ## should change the name - did not test yet
 })
 
 
@@ -217,12 +217,12 @@ server <- function(input, output, session) {
         run_plot()  ## did not add to server yet
     })
 ## Sub Series Plot
-    output$mean_plot_contents <- renderPlot({
-        mean_plot()
+    output$mean_plot_contents <- renderPlotly({
+        plotly::ggplotly(mean_plot())
     })
 ## Overall Sequence Average plots
-    output$sequence_plot_contents <- renderPlot({
-        sequence_plot()
+    output$sequence_plot_contents <- renderPlotly({
+        plotly::ggplotly(sequence_plot())
     })
 ### Display Descriptive Stats ####
 ## Overall
