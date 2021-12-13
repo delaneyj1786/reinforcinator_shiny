@@ -73,7 +73,7 @@ ui <- fluidPage(
                         choices = "Nothing Selected"),
 ## Need 1) partner rcounter 2) deleter 3) combiner
 
-            actionButton("button4", "Run 2 Group Analysis"),
+            actionButton("run_2group_button", "Run 2 Group Analysis"),
 br(), # grouping by two
 # actionButton("run_runplot", "Run Running Plot"), br(),
 # actionButton("run_meanplot", "Run Mean Plot"), br(),
@@ -419,11 +419,11 @@ rc_tables <<- reactive({
     }) ## Close ObserveEvent
 
 #### Activate Reinforcinator (Two Group Analysis) ####
-    observeEvent(c(input$button4,input$beh_var,input$reinf_var,input$beh_stream,
+    observeEvent(c(input$run_2group_button,input$beh_var,input$reinf_var,input$beh_stream,
                    input$group_var, input$group_var2),{
 
         # Create Behavior Stream
-        behaviorstream<<-eventReactive(input$button4,{
+        behaviorstream<<-eventReactive(input$run_2group_button,{
             (((dat1()[[input$beh_stream]])))
         }) # close behavior stream
 
