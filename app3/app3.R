@@ -65,20 +65,13 @@ ui <- fluidPage(
             selectInput(inputId = "group_var",
                         label = "Select Group Variable:",
                         choices = "Nothing Selected"),
-            # actionButton("run_group_button", "Run Group Analysis"),
-            # br(), # grouping
 
             selectInput(inputId = "group_var2",
                         label = "Select Second Group Variable:",
                         choices = "Nothing Selected"),
-## Need 1) partner rcounter 2) deleter 3) combiner
 
-            # actionButton("run_2group_button", "Run 2 Group Analysis"),
 br(), # grouping by two
 
-# actionButton("run_runplot", "Run Running Plot"), br(),
-# actionButton("run_meanplot", "Run Mean Plot"), br(),
-# actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
             actionButton("run_plots", "Run Plots"), br(),
 
             downloadLink("downloadData", "Download Recounted Data File"), br(),
