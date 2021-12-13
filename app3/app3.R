@@ -94,6 +94,8 @@ br(), # grouping by two
             br(),
             "3. Statistics: This tab contains 1) Overall Data Descriptives, 2) Recounted table (  ),
             3), Grouped Data Descriptives.",
+            br(),
+            "4. Instructions: This tab contains more detailed instructions regarding input / output interface",
 h2("Input"),
 "1. Select Dataset using 'Choose CSV File' or 'Choose Built In Dataset",
 br(),
