@@ -81,6 +81,14 @@ br(), # grouping by two
 
         # Show a plot of the generated distribution
         mainPanel(
+            h2("Input and Output"),
+            "All input is done by the left hand panel, the user can select data and variables for the analysis using the left-hand panel.",
+            br(),
+            "Output is accessed through the bottom panel of the screen. This is divided into 4 output tabs. ",
+            br(),
+            "1. Datasets: This tab contains 1) the original dataset (i.e., Data), 2) the reinforcement dataset (i.e., Recounted Data),
+            3) Reinforcement with respect to a group (i.e., Recounted Group), 4) Reinforcement with respect to two groups / clusters (i.e,. Recounted 2 Group)",
+
 "1. Select Dataset using 'Choose CSV File' or 'Choose Built In Dataset",
 br(),
 "2. Confirm Data Selection: This uploads the dataset to the program",
