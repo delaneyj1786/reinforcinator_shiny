@@ -311,7 +311,7 @@ server <- function(input, output, session) {
         "})
 
 #### Sidebar interface ####
-## Behavior Stream
+## Behavior Stream and Group Vars
     observe({
         dsnames <- names(dat1())
         cb_options <- list()
@@ -329,10 +329,7 @@ server <- function(input, output, session) {
                           label = NULL,
                           choices =  column_levels ,
                           selected = "Nothing Selected")
-    })
-## Consequence Var
-    observeEvent(input$beh_stream,{ # Probably redundant
-        column_levels <- as.character(sort(unique(dat1()[[input$beh_stream]])))
+# Reinforcement Vars
         updateSelectInput(session, "reinf_var",
                           label = NULL,
                           choices =  column_levels ,
