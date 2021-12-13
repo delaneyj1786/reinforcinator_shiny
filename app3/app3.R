@@ -65,7 +65,7 @@ ui <- fluidPage(
             selectInput(inputId = "group_var",
                         label = "Select Group Variable:",
                         choices = "Nothing Selected"),
-            actionButton("button3", "Run Group Analysis"),
+            actionButton("run_group_button", "Run Group Analysis"),
             br(), # grouping
 
             selectInput(inputId = "group_var2",
@@ -377,11 +377,11 @@ rc_tables <<- reactive({
 })
 
 #### Activate Reinforcinator (Group 1 Analysis) ####
-    observeEvent(c(input$button3,input$beh_var,
+    observeEvent(c(input$run_group_button,input$beh_var,
                    input$reinf_var,input$beh_stream, input$group_var),{
 
         # Create Behavior Stream
-        behaviorstream<<-eventReactive(input$button3,{
+        behaviorstream<<-eventReactive(input$run_group_button,{
             (((dat1()[[input$beh_stream]])))
         })
         # Create Split DF (1 group)
