@@ -59,7 +59,7 @@ ui <- fluidPage(
                         label = "Select Target Consequence (IV):",
                         choices = "Nothing Selected"),
 
-            actionButton("button2", "Run Overall Analysis"),
+            actionButton("run_overall", "Run Overall Analysis"),
             br(), # no group
 
             selectInput(inputId = "group_var",
@@ -305,9 +305,6 @@ server <- function(input, output, session) {
          *note that (B_NT + B_T) = 1 AND (A_NT + A_T) = 1
 
 
-
-
-
         "})
 
 #### Sidebar interface ####
@@ -351,9 +348,9 @@ server <- function(input, output, session) {
 
 
 #### Activate Reinforcinator (Overall Analysis) ####
-    observeEvent(c(input$button2,input$beh_var,input$reinf_var,input$beh_stream),{
+    observeEvent(c(input$run_overall,input$beh_var,input$reinf_var,input$beh_stream),{
         # Create Behavior Stream
-        behaviorstream<<-eventReactive(input$button2,{
+        behaviorstream<<-eventReactive(input$run_overall,{
             (((dat1()[[input$beh_stream]])))
         })
         # Create RC Df
