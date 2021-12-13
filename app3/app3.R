@@ -43,7 +43,7 @@ ui <- fluidPage(
                                     "Reinforcement",
                                     "Neutral",
                                     "Punishment")),
-            actionButton("button1", "Confirm Data Selection"),
+            actionButton("confirm_data_button", "Confirm Data Selection"),
 
             br(),
             selectInput(inputId = "beh_stream",
@@ -181,7 +181,7 @@ server <- function(input, output, session) {
 
 ## Pre Load Data
     ### alternative w/pre load
-    dat1<-eventReactive(input$button1,{
+    dat1<-eventReactive(input$confirm_data_button,{
         switch(input$dataset,
                "Input_File"= csv(),
                "Elevator" = elevator,
