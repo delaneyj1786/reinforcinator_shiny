@@ -73,7 +73,7 @@ ui <- fluidPage(
                         choices = "Nothing Selected"),
 ## Need 1) partner rcounter 2) deleter 3) combiner
 
-            actionButton("run_2group_button", "Run 2 Group Analysis"),
+            # actionButton("run_2group_button", "Run 2 Group Analysis"),
 br(), # grouping by two
 
 # actionButton("run_runplot", "Run Running Plot"), br(),
