@@ -47,7 +47,7 @@ ui <- fluidPage(
 
             br(),
             selectInput(inputId = "beh_stream",
-                        label = "Select Behavior Stream Column:",
+                        label = "Select Behavior Stream Variable:",
                         choices = "Nothing Selected"),
 
             selectInput(inputId = "beh_var",
@@ -85,7 +85,9 @@ br(), # grouping by two
 br(),
 "2. Confirm Data Selection: This uploads the dataset to the program",
 br(),
-"3. Select ",
+"3. Select Behavior Stream Variable: This is the column of the datafile containing observational codes. It should
+be a sequence of behavioral codes unfolding in time",
+br(),
 
             tabsetPanel(position = "above",
                         tabPanel("Instructions", uiOutput("Tab4")),
