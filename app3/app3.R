@@ -65,8 +65,8 @@ ui <- fluidPage(
             selectInput(inputId = "group_var",
                         label = "Select Group Variable:",
                         choices = "Nothing Selected"),
-            actionButton("run_group_button", "Run Group Analysis"),
-            br(), # grouping
+            # actionButton("run_group_button", "Run Group Analysis"),
+            # br(), # grouping
 
             selectInput(inputId = "group_var2",
                         label = "Select Second Group Variable:",
