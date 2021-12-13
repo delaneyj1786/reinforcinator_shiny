@@ -81,39 +81,12 @@ br(), # grouping by two
 
         # Show a plot of the generated distribution
         mainPanel(
-            h1("Navigation"),
-            "For detailed information for each of these topics, please see the 'Instructions' tab.",
-            br(),
-            "To begin analysis, use the Input Sidebar to select the dataset and independent variables. All output
-            is accessed by the Panels on the bottom of the screen.",
-            h2("Input Sidebar (Left hand side)"),
-            "The left hand panel contains drop-down menus for the user to select the dataset and variables for their reinforcer analysis.",
-            br(),
-            "The user must select 'Confirm Data Selection' after choosing a dataset. The user then must click on
-            (1) Run overall analsis for an overall reinforcer analysis or (2) Run Group Analysis (for a single cluster variable) or (3) Run Two-Group analysis (for 2 cluster variables)",
-            br(),
-            h2("Output Tabs"),
-            br(),
-  "          The output is divided into 3 sections / Panels",
-            br(),
-            h3("Datasets"),
-            br(),
-            "The purpose of this Panel is to allow users to see that actual data anlyzed by the reinforcinator. The user can
-            download each dataset by clicking on its corresponding link on the left hand sidebar.
-            This tab contains (1) Data : a printout of the original data (see 'Data'), (2) Recounted Data : a printout of the transformed data which sorts behaviors before and after reinforcement,
-            (3) Recounted Group Data: a printout of the transformed data with respect to a single clustering / grouping variable and (4) Recounted 2 Group : a printout
-            of the transformed data with respect to a double clustering / grouping variable.",
-            br(),
-            h3("Plots"),
-            "Plots : The plots Panel contains 3 plots of the reinforcement data. The first tab (Plot Dat), shows the dataset used to create the 3 plots.
-            (1) Running Plot : Shows the running probability of the dependent variable across the observation series. (2) Mean change plot : This shows the average
-            value of the DV before (in red) and after (in green), each reinforcer, (3) Overall Sequence plot : This shows the
-            average value before (in red) and after (in green) across all reinforcers.",
-            br(),
-            h3("Statistics"),
-            "The Statistics Panel contains three tabs.  1) overall descriptives : This contains descriptive statistics regarding
-  the reinforcement dataset, 2) Recounted Table : This contains the contingency tables based off the reinforcement analysis,
-  3) Grouped descriptives : This contains descriptive statistics for a grouped based reinforcement analysis ",
+"1. Select Dataset using 'Choose CSV File' or 'Choose Built In Dataset",
+br(),
+"2. Confirm Data Selection: This uploads the dataset to the program",
+br(),
+"3. Select ",
+
             tabsetPanel(position = "above",
                         tabPanel("Instructions", uiOutput("Tab4")),
                         tabPanel("Data Sets", uiOutput("Tab1")),
@@ -539,3 +512,40 @@ rc_tables <<- reactive({
 
 # Run the application
 shinyApp(ui = ui, server = server)
+
+
+
+
+# h1("Navigation"),
+# "For detailed information for each of these topics, please see the 'Instructions' tab.",
+# br(),
+# "To begin analysis, use the Input Sidebar to select the dataset and independent variables. All output
+#             is accessed by the Panels on the bottom of the screen.",
+# h2("Input Sidebar (Left hand side)"),
+# "The left hand panel contains drop-down menus for the user to select the dataset and variables for their reinforcer analysis.",
+# br(),
+# "The user must select 'Confirm Data Selection' after choosing a dataset. The user then must click on
+#             (1) Run overall analsis for an overall reinforcer analysis or (2) Run Group Analysis (for a single cluster variable) or (3) Run Two-Group analysis (for 2 cluster variables)",
+# br(),
+# h2("Output Tabs"),
+# br(),
+# "          The output is divided into 3 sections / Panels",
+# br(),
+# h3("Datasets"),
+# br(),
+# "The purpose of this Panel is to allow users to see that actual data anlyzed by the reinforcinator. The user can
+#             download each dataset by clicking on its corresponding link on the left hand sidebar.
+#             This tab contains (1) Data : a printout of the original data (see 'Data'), (2) Recounted Data : a printout of the transformed data which sorts behaviors before and after reinforcement,
+#             (3) Recounted Group Data: a printout of the transformed data with respect to a single clustering / grouping variable and (4) Recounted 2 Group : a printout
+#             of the transformed data with respect to a double clustering / grouping variable.",
+# br(),
+# h3("Plots"),
+# "Plots : The plots Panel contains 3 plots of the reinforcement data. The first tab (Plot Dat), shows the dataset used to create the 3 plots.
+#             (1) Running Plot : Shows the running probability of the dependent variable across the observation series. (2) Mean change plot : This shows the average
+#             value of the DV before (in red) and after (in green), each reinforcer, (3) Overall Sequence plot : This shows the
+#             average value before (in red) and after (in green) across all reinforcers.",
+# br(),
+# h3("Statistics"),
+# "The Statistics Panel contains three tabs.  1) overall descriptives : This contains descriptive statistics regarding
+#   the reinforcement dataset, 2) Recounted Table : This contains the contingency tables based off the reinforcement analysis,
+#   3) Grouped descriptives : This contains descriptive statistics for a grouped based reinforcement analysis ",
