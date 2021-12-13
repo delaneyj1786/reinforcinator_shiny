@@ -75,6 +75,7 @@ ui <- fluidPage(
 
             actionButton("run_2group_button", "Run 2 Group Analysis"),
 br(), # grouping by two
+
 # actionButton("run_runplot", "Run Running Plot"), br(),
 # actionButton("run_meanplot", "Run Mean Plot"), br(),
 # actionButton("run_sequenceplot", "Run Overall Sequence Plot"), br(),
@@ -377,11 +378,11 @@ rc_tables <<- reactive({
 })
 
 #### Activate Reinforcinator (Group 1 Analysis) ####
-    observeEvent(c(input$run_group_button,input$beh_var,
+    observeEvent(c(input$input$run_overall,input$beh_var,
                    input$reinf_var,input$beh_stream, input$group_var),{
 
         # Create Behavior Stream
-        behaviorstream<<-eventReactive(input$run_group_button,{
+        behaviorstream<<-eventReactive(input$input$run_overall,{
             (((dat1()[[input$beh_stream]])))
         })
         # Create Split DF (1 group)
@@ -419,11 +420,11 @@ rc_tables <<- reactive({
     }) ## Close ObserveEvent
 
 #### Activate Reinforcinator (Two Group Analysis) ####
-    observeEvent(c(input$run_2group_button,input$beh_var,input$reinf_var,input$beh_stream,
+    observeEvent(c(input$input$run_overall,input$beh_var,input$reinf_var,input$beh_stream,
                    input$group_var, input$group_var2),{
 
         # Create Behavior Stream
-        behaviorstream<<-eventReactive(input$run_2group_button,{
+        behaviorstream<<-eventReactive(input$input$run_overall,{
             (((dat1()[[input$beh_stream]])))
         }) # close behavior stream
 
