@@ -316,10 +316,23 @@ server <- function(input, output, session) {
         dsnames <- names(dat1())
         cb_options <- list()
         cb_options[dsnames] <- dsnames
+        # For behaviorstream
         updateSelectInput(session, "beh_stream",
                           label = NULL,
                           choices = cb_options,
                           selected = "")
+        # For Group 1
+        updateSelectInput(session, "group_var",
+                          label = NULL,
+                          choices = cb_options,
+                          selected = "")
+
+        # For Group 2
+        updateSelectInput(session, "group_var2",
+                          label = NULL,
+                          choices = cb_options,
+                          selected = "")
+
     })
 ## Behavior var (based on behavior stream levels)
 # https://stackoverflow.com/questions/47248534/dynamically-list-choices-for-selectinput-from-a-user-selected-column
@@ -335,26 +348,7 @@ server <- function(input, output, session) {
                           choices =  column_levels ,
                           selected = "Nothing Selected")
     })
-## Group names (single group)
-    observe({
-        dsnames <- names(dat1())
-        cb_options <- list()
-        cb_options[dsnames] <- dsnames
-        updateSelectInput(session, "group_var",
-                          label = NULL,
-                          choices = cb_options,
-                          selected = "")
-    })
-## Group names (two groups)
-    observe({
-        dsnames <- names(dat1())
-        cb_options <- list()
-        cb_options[dsnames] <- dsnames
-        updateSelectInput(session, "group_var2",
-                          label = NULL,
-                          choices = cb_options,
-                          selected = "")
-    })
+
 
 #### Activate Reinforcinator (Overall Analysis) ####
     observeEvent(c(input$button2,input$beh_var,input$reinf_var,input$beh_stream),{
