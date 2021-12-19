@@ -1,0 +1,14 @@
+name: app3
+title: app3
+username:
+account: delaneyj1786
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5347220
+bundleId: 5389182
+url: https://delaneyj1786.shinyapps.io/app3/
+when: 1639879138.91699
+lastSyncTime: 1639879138.91699
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: reinforcinator_modules.R
