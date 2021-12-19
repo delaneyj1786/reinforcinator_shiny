@@ -82,7 +82,9 @@ br(), # grouping by two
         # Show a plot of the generated distribution
         mainPanel(
             h2("Input and Output"),
-            "All input is done by the left hand panel, the user can select data and variables for the analysis using the left-hand panel.",
+            "All input is done by the left hand panel, the user can select data and variables for the analysis using the left-hand panel. All output is
+            accessed by the four panes on the bottom panel of the screen. The user can download transformed datafiles
+            by clicking on one of the three 'download' links, at the bottom of the left hand panel.",
             br(),
             h2("Output"),
             "Output is accessed through the bottom panel of the screen. This is divided into 4 output tabs. ",
@@ -90,10 +92,11 @@ br(), # grouping by two
             "1. Datasets: This tab contains 1) the original dataset (i.e., Data), 2) the reinforcement dataset (i.e., Recounted Data),
             3) Reinforcement with respect to a group (i.e., Recounted Group), 4) Reinforcement with respect to two groups / clusters (i.e,. Recounted 2 Group)",
             br(),
-            "2. Plots: This tab contains four output tabs 1) ",
+            "2. Plots: This tab contains four output tabs 1) Plot Data, 2) Running Plot, 3) Mean Change Plot, and 4)
+            Overall Sequence Plot. These are described in detail in the Plot Description tab, under Instructions. " ,
             br(),
-            "3. Statistics: This tab contains 1) Overall Data Descriptives, 2) Recounted table (  ),
-            3), Grouped Data Descriptives.",
+            "3. Statistics: This tab contains 1) Overall Data Descriptives, 2) Recounted table Descriptives, and
+            3), Grouped Data Descriptives. These are described in detail in the Statistics tab, under Instructions.",
             br(),
             "4. Instructions: This tab contains more detailed instructions regarding input / output interface",
 h2("Input"),
@@ -140,7 +143,7 @@ server <- function(input, output, session) {
 ## PLOT Tabs
     output$Tab2 <- renderUI({
     tabsetPanel(id = "sub_tab_two",
-    tabPanel("Plot Dat", tableOutput("contents_plot_dat")),
+    tabPanel("Plot Data", tableOutput("contents_plot_dat")),
     tabPanel("Running Plot",  plotlyOutput("run_plot_contents")),
     tabPanel("Mean Change Plot", plotlyOutput("mean_plot_contents")),## should change the name - did not test yet
     tabPanel("Overall Sequence Plot", plotlyOutput("sequence_plot_contents"))) ## should change the name - did not test yet
@@ -151,7 +154,7 @@ server <- function(input, output, session) {
     output$Tab3 <- renderUI({
         tabsetPanel(id = "sub_tab_three",
                     tabPanel("Overall Data Descriptives",verbatimTextOutput("descriptive_contents")), # should be vanilla ...
-                    tabPanel("Recounted Table",verbatimTextOutput("rc_tables_contents")), # should be vanilla only for the base recounted table
+                    tabPanel("Recounted Table Descriptives",verbatimTextOutput("rc_tables_contents")), # should be vanilla only for the base recounted table
                     tabPanel("Grouped Data Descriptives ",verbatimTextOutput("descriptive_contents_group")) # should be vanilla only for the base recounted table
         )
     })
