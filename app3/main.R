@@ -1,6 +1,6 @@
 library(shiny)
 library(devtools)
-library(tidyverse)
+#library(tidyverse)
 library(plotly)
 #install_github("delaneyj1786/REINFORCINATOR")
 library(ReenforcinateR)
