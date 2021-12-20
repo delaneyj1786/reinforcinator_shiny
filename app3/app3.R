@@ -1,15 +1,3 @@
-# note : testing files located in desktop / sage analysis
-# creating some shorter test files
-
-#### TODO
-# Will need to add a 'search by video feature'
-#  simple filter - but needs percentage summary foo particular behaviors (i.g., ALL OP videos)
-
-#### Need to update plot data ... it is not updating the two graphs for multiple groups
-## grouping has no effect on the graph output
-
-#test <- recounter(elevator,BEH,"o","A")$recounted_data_frame
-
 
 source("main.R")
 
