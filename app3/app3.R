@@ -11,12 +11,7 @@
 #test <- recounter(elevator,BEH,"o","A")$recounted_data_frame
 
 
-library(shiny)
-library(devtools)
-library(tidyverse)
-library(plotly)
-#install_github("delaneyj1786/REINFORCINATOR")
-library(ReenforcinateR)
+source("main.R")
 
 
 ui <- fluidPage(
