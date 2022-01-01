@@ -3,5 +3,4 @@ require(devtools)
 #library(tidyverse)
 require(plotly)
 #install_github("delaneyj1786/REINFORCINATOR")
-require(ReenforcinateR,
-        logical.return == TRUE)
+require(ReenforcinateR)
