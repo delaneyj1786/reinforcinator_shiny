@@ -10,7 +10,7 @@ ui <- fluidPage(
     # Sidebar with a slider input for input for functions
     sidebarLayout(
         sidebarPanel(
-            fileInput("file1", "Choose CSV File (Step 1.A (option 1))",
+            fileInput("file1", "Choose CSV File (Step 1.A) [Option 1]",
                       accept = c(
                           "text/csv",
                           "text/comma-separated-values,text/plain",
@@ -19,7 +19,7 @@ ui <- fluidPage(
             tags$hr(),
             checkboxInput("header", "Header", TRUE),
             selectInput(inputId = "dataset",
-                        label = "Choose a dataset (Step 1.A (option 2)):",
+                        label = "Choose a dataset (Step 1.A) [Option 2]",
                         choices = c("Input_File",
                                     "Elevator",
                                     "Picture",
@@ -31,36 +31,36 @@ ui <- fluidPage(
 
             br(),
             selectInput(inputId = "beh_stream",
-                        label = "Select Behavior Stream Variable (Step 2):",
+                        label = "Select Behavior Stream Variable (Step 2)",
                         choices = "Nothing Selected"),
 
             selectInput(inputId = "beh_var",
-                        label = "Select Target Behavior (DV) (Step 3.A):",
+                        label = "Select Target Behavior (DV) (Step 3.A)",
                         choices = "Nothing Selected"),
 
 
             selectInput(inputId = "reinf_var",
-                        label = "Select Target Consequence (IV) (Step 3.B):",
+                        label = "Select Target Consequence (IV) (Step 3.B)",
                         choices = "Nothing Selected"),
 
             actionButton("run_overall", "Run Overall Analysis (Step 4)"),
             br(), # no group
 
             selectInput(inputId = "group_var",
-                        label = "Select Group Variable (Step 5.A - Optional):",
+                        label = "Select Group Variable (Step 5.A) [Optional]",
                         choices = "Nothing Selected"),
 
             selectInput(inputId = "group_var2",
-                        label = "Select Second Group Variable (Step 5.B - Optional):",
+                        label = "Select Second Group Variable (Step 5.B) [Optional]",
                         choices = "Nothing Selected"),
 
 br(), # grouping by two
 
-            actionButton("run_plots", "Run Plots"), br(),
+            actionButton("run_plots", "Run Plots (Step 6 - Optional)"), br(),
 
-            downloadLink("downloadData", "Download Recounted Data File"), br(),
-            downloadLink("downloadData_1group", "Download Recounted Group Data File"), br(),
-            downloadLink("downloadData_2group", "Download Recounted 2 Group Data File")
+            downloadLink("downloadData", "Download Recounted Data File (Step 7.A - Optional)"), br(),
+            downloadLink("downloadData_1group", "Download Recounted Group Data File (Step 7.B - Optional)"), br(),
+            downloadLink("downloadData_2group", "Download Recounted 2 Group Data File (Step 7.C - Optional)")
         ), # close sidebar panel
 
         # Show a plot of the generated distribution
