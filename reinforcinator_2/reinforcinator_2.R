@@ -31,27 +31,27 @@ ui <- fluidPage(
 
             br(),
             selectInput(inputId = "beh_stream",
-                        label = "Select Behavior Stream Variable:",
+                        label = "Select Behavior Stream Variable (Step 2):",
                         choices = "Nothing Selected"),
 
             selectInput(inputId = "beh_var",
-                        label = "Select Target Behavior (DV):",
+                        label = "Select Target Behavior (DV) (Step 3.A):",
                         choices = "Nothing Selected"),
 
 
             selectInput(inputId = "reinf_var",
-                        label = "Select Target Consequence (IV):",
+                        label = "Select Target Consequence (IV) (Step 3.B):",
                         choices = "Nothing Selected"),
 
-            actionButton("run_overall", "Run Overall Analysis"),
+            actionButton("run_overall", "Run Overall Analysis (Step 4)"),
             br(), # no group
 
             selectInput(inputId = "group_var",
-                        label = "Select Group Variable:",
+                        label = "Select Group Variable (Step 5.A - Optional):",
                         choices = "Nothing Selected"),
 
             selectInput(inputId = "group_var2",
-                        label = "Select Second Group Variable:",
+                        label = "Select Second Group Variable (Step 5.B - Optional):",
                         choices = "Nothing Selected"),
 
 br(), # grouping by two
