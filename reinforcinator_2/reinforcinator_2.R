@@ -10,7 +10,7 @@ ui <- fluidPage(
     # Sidebar with a slider input for input for functions
     sidebarLayout(
         sidebarPanel(
-            fileInput("file1", "Choose CSV File",
+            fileInput("file1", "Choose CSV File (Step 1.A (option 1))",
                       accept = c(
                           "text/csv",
                           "text/comma-separated-values,text/plain",
@@ -19,7 +19,7 @@ ui <- fluidPage(
             tags$hr(),
             checkboxInput("header", "Header", TRUE),
             selectInput(inputId = "dataset",
-                        label = "Choose a dataset:",
+                        label = "Choose a dataset (Step 1.A (option 2)):",
                         choices = c("Input_File",
                                     "Elevator",
                                     "Picture",
@@ -27,7 +27,7 @@ ui <- fluidPage(
                                     "Reinforcement",
                                     "Neutral",
                                     "Punishment")),
-            actionButton("confirm_data_button", "Confirm Data Selection"),
+            actionButton("confirm_data_button", "Confirm Data Selection (Step 1.B)"),
 
             br(),
             selectInput(inputId = "beh_stream",
