@@ -99,11 +99,12 @@ br(),
 that the user must select this button for any analysis to run (   )",
 br(),
 "7. To run a single or multiple group analysis, the user must click on the variable containing the nesting variables.",
-            tabsetPanel(position = "above",
-                        tabPanel("Instructions", uiOutput("Tab4")),
-                        tabPanel("Data Sets", uiOutput("Tab1")),
+            tabsetPanel(position = "Above",
+                        tabPanel("Preview Data Sets", uiOutput("Tab1")),
                         tabPanel("Plots", uiOutput("Tab2")),
-                        tabPanel("Statistics", uiOutput("Tab3")) # To have a separate text/only panel just for instructions
+                        tabPanel("Statistics", uiOutput("Tab3")),
+                        tabPanel("Instructions", uiOutput("Tab4"))
+                        # To have a separate text/only panel just for instructions
 
             ) # close tabset panel
         ) # close main panel
