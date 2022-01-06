@@ -58,9 +58,9 @@ br(), # grouping by two
 
             actionButton("run_plots", "Run Plots (Step 6 - Optional)"), br(),
 
-            downloadLink("downloadData", "Download Recounted Data File (Step 7.A - Optional)"), br(),
-            downloadLink("downloadData_1group", "Download Recounted Group Data File (Step 7.B - Optional)"), br(),
-            downloadLink("downloadData_2group", "Download Recounted 2 Group Data File (Step 7.C - Optional)")
+            downloadLink("downloadData", "Download Recounted Data File (Step 7.A) [Optional]"), br(),
+            downloadLink("downloadData_1group", "Download Recounted Group Data File (Step 7.B) [Optional]"), br(),
+            downloadLink("downloadData_2group", "Download Recounted 2 Group Data File (Step 7.C [Optional]")
         ), # close sidebar panel
 
         # Show a plot of the generated distribution
