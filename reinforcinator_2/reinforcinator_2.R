@@ -65,40 +65,15 @@ br(), # grouping by two
 
         # Show a plot of the generated distribution
         mainPanel(
-            h2("Input and Output"),
-            "All input is done by the left hand panel, the user can select data and variables for the analysis using the left-hand panel. All output is
-            accessed by the four panes on the bottom panel of the screen. The user can download transformed datafiles
-            by clicking on one of the three 'download' links, at the bottom of the left hand panel.",
+            h2("Getting Started"),
+            "The left side bar contains input for data / variable selection",
             br(),
-            h2("Output"),
-            "Output is accessed through the bottom panel of the screen. This is divided into 4 output tabs. ",
+            "The bottom panel contains output tabs",
             br(),
-            "1. Datasets: This tab contains 1) the original dataset (i.e., Data), 2) the reinforcement dataset (i.e., Recounted Data),
-            3) Reinforcement with respect to a group (i.e., Recounted Group), 4) Reinforcement with respect to two groups / clusters (i.e,. Recounted 2 Group)",
+            "To start, please follow the steps on the left hand side. Click on 'Preview Data Sets' after completing Step 1",
             br(),
-            "2. Plots: This tab contains four output tabs 1) Plot Data, 2) Running Plot, 3) Mean Change Plot, and 4)
-            Overall Sequence Plot. These are described in detail in the Plot Description tab, under Instructions. " ,
-            br(),
-            "3. Statistics: This tab contains 1) Overall Data Descriptives, 2) Recounted table Descriptives, and
-            3), Grouped Data Descriptives. These are described in detail in the Statistics tab, under Instructions.",
-            br(),
-            "4. Instructions: This tab contains more detailed instructions regarding input / output interface",
-h2("Input"),
-"1. Select Dataset using 'Choose CSV File' or 'Choose Built In Dataset",
-br(),
-"2. Confirm Data Selection: This uploads the dataset to the program",
-br(),
-"3. Select Behavior Stream Variable: This is the column of the datafile containing observational codes. It should
-be a sequence of behavioral codes unfolding in time",
-br(),
-"4. Select Target Behavior (DV)",
-br(),
-"5. Select Target Consequence (IV)",
-br(),
-"6. Run Overall Analysis Button. This button is necessary to run the reinforcement detection algorithm. Note,
-that the user must select this button for any analysis to run (   )",
-br(),
-"7. To run a single or multiple group analysis, the user must click on the variable containing the nesting variables.",
+            "Additional instructions and details can be found by clicking the 'Instructions' tab on the bottom Panel",
+
             tabsetPanel(position = "Above",
                         tabPanel("Preview Data Sets", uiOutput("Tab1")),
                         tabPanel("Plots", uiOutput("Tab2")),
@@ -149,8 +124,9 @@ server <- function(input, output, session) {
         tabsetPanel(id = "sub_tab_four",
                     tabPanel("Background",verbatimTextOutput("backround_text")), # should be vanilla ...
                     tabPanel("Inputting Data",verbatimTextOutput("input_data")), # should be vanilla only for the base recounted table
-                    tabPanel("Interpreting Output ",verbatimTextOutput("interpret")) # should be vanilla only for the base recounted table
-        )
+                    tabPanel("Interpreting Output ",verbatimTextOutput("interpret")), # should be vanilla only for the base recounted table
+                    tabPanel("Input and Output", verbatimTextOutput("io_instructions")) #basically the original instrucitons
+                    )
     })
 
 
@@ -232,6 +208,49 @@ server <- function(input, output, session) {
 
 
     })
+
+    output$io_instructions <- renderText({
+        "All input is done by the left hand panel, the user can select data and variables for the analysis using the left-hand panel. All output is
+            accessed by the four panes on the bottom panel of the screen. The user can download transformed datafiles
+            by clicking on one of the three 'download' links, at the bottom of the left hand panel.
+
+        OUTPUT
+
+        Output is accessed through the bottom panel of the screen. This is divided into 4 output tabs.
+
+        1. Datasets: This tab contains 1) the original dataset (i.e., Data), 2) the reinforcement dataset (i.e., Recounted Data),
+            3) Reinforcement with respect to a group (i.e., Recounted Group), 4) Reinforcement with respect to two groups / clusters (i.e,. Recounted 2 Group)
+
+        2. Plots: This tab contains four output tabs 1) Plot Data, 2) Running Plot, 3) Mean Change Plot, and 4)
+            Overall Sequence Plot. These are described in detail in the Plot Description tab, under Instructions.
+
+        3. Statistics: This tab contains 1) Overall Data Descriptives, 2) Recounted table Descriptives, and
+            3), Grouped Data Descriptives. These are described in detail in the Statistics tab, under Instructions.
+
+        4. Instructions: This tab contains more detailed instructions regarding input / output interface
+
+        INPUT
+
+        1. Select Dataset using 'Choose CSV File' or 'Choose Built In Dataset'
+
+        2. Confirm Data Selection: This uploads the dataset to the program
+
+        3. Select Behavior Stream Variable: This is the column of the datafile containing observational codes. It should
+be a sequence of behavioral codes unfolding in time
+
+        4. Select Target Behavior (DV)
+
+        5. Select Target Consequence (IV)
+
+        6. Run Overall Analysis Button. This button is necessary to run the reinforcement detection algorithm. Note,
+that the user must select this button for any analysis to run (   )
+
+        7. To run a single or multiple group analysis, the user must click on the variable containing the nesting variables."
+    })
+
+
+
+
 
     output$input_data <- renderText({"Inputting Data.
 
